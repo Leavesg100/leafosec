@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pentest Portfolio | Ethical Hacker</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" href="leafo.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="images/leafo.jpg">
+
+    <meta name="theme-color" content="#0a0e14">
+</head>
+
+<body class="dark-theme layout-desktop">
+
+    <div class="system-telemetry" id="system-telemetry" aria-live="polite" aria-atomic="true">
+        <h4>System Telemetry</h4>
+        <div><span>CPU Load</span><span id="telemetry-cpu">12%</span></div>
+        <div><span>Network</span><span id="telemetry-net">1.2 Mbps</span></div>
+        <div><span>Beacon</span><span id="telemetry-beacon">active</span></div>
+    </div>
+
+    <div class="container">
+
+        <div class="site-banner">
+            <img src="images/banner.png" alt="Site Banner" class="banner-image">
+        </div>
+
+        <!-- Header Section with Profile & Navigation -->
+        <header>
+            <div class="header-main-flex">
+                <div class="logo-frame">
+                    <!-- Your LEAFOSEC Cyber-Crest Logo File Asset Hook -->
+                    <img src="images/leafo.jpg" alt="LEAFOSEC Cyber Security Crest Logo" id="portfolio-logo">
+                </div>
+                <div class="header-text">
+                    <p>Ethical Hacker & Penetration Tester. Breaking things legally.</p>
+                    <nav>
+                        <a href="#interactive-terminal">/terminal</a>
+                        <a href="#about">/about</a>
+                        <a href="#tools-arsenal">/tools</a>
+                        <a href="#wardriving">/wardriving</a>
+                        <a href="#image-gallery">/gallery</a>
+                        <a href="#writeups">/reports</a>
+                        <a href="videos.html">/videos</a>
+                        <a href="reviews.html">/reviews</a>
+                    </nav>
+                    <div class="header-top">
+                        <div id="text-target" class="header-typing">
+                        </div>
+                        <div class="layout-hamburger">
+                            <button id="layout-toggle-btn" class="layout-hamburger-btn" type="button"
+                                aria-expanded="false" aria-controls="layout-dropdown">☰</button>
+                            <div id="layout-dropdown" class="layout-dropdown" aria-hidden="true">
+                                <button id="layout-desktop-btn" class="layout-btn" type="button"
+                                    title="Desktop layout">Desktop</button>
+                                <button id="layout-tablet-btn" class="layout-btn" type="button"
+                                    title="Tablet layout">Tablet</button>
+                                <button id="layout-mobile-btn" class="layout-btn" type="button"
+                                    title="Mobile layout">Mobile</button>
+                            </div>
+                        </div>
+                        <button id="theme-toggle" class="btn btn-primary" type="button">Matrix Mode</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="mission-dashboard" class="mission-dashboard">
+                <div class="dashboard-heading">
+                    <div>
+                        <h2>> Mission Dashboard</h2>
+                        <p class="muted-text">Current operator status, evidence routes, and fast access to the strongest
+                            portfolio areas.</p>
+                    </div>
+                    <div class="dashboard-state">
+                        <span class="status-dot active"></span>
+                        active lab
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <article class="metric-card">
+                        <span class="metric-label">Current Focus</span>
+                        <strong>RF / Web / Field Recon</strong>
+                        <p>Wireless analysis, sub-GHz signal review, and controlled application security labs.</p>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-label">Latest Operation</span>
+                        <strong>Sub-GHz RF Recon</strong>
+                        <p>URH-assisted packet comparison with rolling-code behavior documented.</p>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-label">Evidence Assets</span>
+                        <strong>Images, Audio, Video</strong>
+                        <p>Hardware gallery, RF audio conversion, wardriving screenshots, and video lab route.</p>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-label">Terminal Shortcuts</span>
+                        <strong>scan portfolio</strong>
+                        <p>Try terminal commands: <code>reports</code>, <code>tools</code>, <code>contact</code>,
+                            <code>open videos</code>.
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SECTION 1: Console Terminal Mini-Game Container Block -->
+            <section id="interactive-terminal">
+                <h2>> Live Terminal Console</h2>
+                <p class="muted-text terminal-intro">Type 'help' to see system flags. Try 'hack' or 'ctf' to
+                    test security controls.</p>
+
+                <div class="terminal-quick-actions" aria-label="Terminal quick commands">
+                    <button class="btn btn-ghost btn-small terminal-command-btn" type="button"
+                        data-command="scan portfolio">scan portfolio</button>
+                    <button class="btn btn-ghost btn-small terminal-command-btn" type="button"
+                        data-command="reports">reports</button>
+                    <button class="btn btn-ghost btn-small terminal-command-btn" type="button"
+                        data-command="tools">tools</button>
+                    <button class="btn btn-ghost btn-small terminal-command-btn" type="button"
+                        data-command="contact">contact</button>
+                    <button class="btn btn-ghost btn-small terminal-command-btn" type="button"
+                        data-command="open videos">open videos</button>
+                </div>
+
+                <div id="terminal" class="terminal-console">
+                    <div class="terminal-console-header">
+                        <div class="terminal-title">Pentest Sandbox</div>
+                        <div class="terminal-status"><span class="status-dot active"></span> online</div>
+                        <div class="terminal-actions">
+                            <button id="hardware-link-btn" class="btn btn-terminal btn-small" type="button">Hardware
+                                Link</button>
+                        </div>
+                    </div>
+                    <div id="terminal-body" class="terminal-body">
+                        <div id="terminal-output" class="terminal-output" role="log" aria-live="polite"
+                            aria-atomic="false">
+                            <div class="terminal-welcome">Session initiated. Welcome back, agent.</div>
+                        </div>
+                    </div>
+                    <div class="terminal-footer">
+                        <span class="prompt">guest@pentest:~$</span>
+                        <input type="text" id="terminal-input" autofocus autocomplete="off" spellcheck="false"
+                            placeholder="Enter command..." aria-label="Terminal command input">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: About Me Profile Section -->
+            <section id="about">
+                <h2>> About Me</h2>
+                <p>Welcome to my security portfolio. I focus on web application testing, network assessment, RF
+                    analysis,
+                    field reconnaissance, and vulnerability research. The work below is framed as controlled, legal,
+                    evidence-led security practice.</p>
+            </section>
+            <!-- General Technical Skills Tags -->
+            <section id="skills">
+                <h2>> Technical Skills</h2>
+                <div class="tags">
+                    <span class="tag">Network Pentesting</span>
+                    <span class="tag">Web App Security (OWASP Top 10)</span>
+                    <span class="tag">Wireshark & Packet Analysis</span>
+                    <span class="tag">Software Defined Radio (SDR)</span>
+                    <span class="tag">RF & Wireless Hacking (802.11/RFID)</span>
+                    <span class="tag">Physical Pentesting & Field Testing</span>
+                    <span class="tag">Python & Bash Scripting</span>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Corrected Pentest Tools Toolkit Alignment -->
+            <section id="tools-arsenal">
+                <h2>> Armed Toolkit & Weaponry</h2>
+                <p style="color: #8b949e; margin-bottom: 20px;">Operational proficiency profiles across standard
+                    industry security frameworks:</p>
+
+                <div class="tools-grid">
+                    <!-- Category 1: Network Infrastructure -->
+                    <div class="tool-category-card">
+                        <h3>[+] Network & Infrastructure</h3>
+                        <div class="tool-item">
+                            <div class="tool-info"><span>Nmap (Network Discovery)</span><span>95%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info"><span>Metasploit Framework</span><span>85%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 2: Web App Security (Matches your EvilM5 image) -->
+                    <div class="tool-category-card">
+                        <h3>[+] Web Application Security</h3>
+
+                        <!-- (preview removed per request) -->
+
+                        <div class="tool-item">
+                            <div class="tool-info"><span>M5Stack Core2 (EvilM5 Platform)</span><span>85%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info"><span>Burp Suite Professional</span><span>90%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info"><span>OWASP ZAP / Dirsearch</span><span>80%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 3: Radio Hacking & SDR (Matches your LilyGO Bruce image) -->
+                    <div class="tool-category-card">
+                        <h3>[+] Radio Hacking & SDR</h3>
+
+                        <div class="tool-media-previews-row">
+                            <div class="tool-media-preview">
+                                <img src="images/RH1.png" alt="Radio Hacking Hardware Unit 1" class="tool-img">
+                            </div>
+                            <div class="tool-media-preview">
+                                <img src="images/RH2.png" alt="Radio Hacking Hardware Unit 2" class="tool-img">
+                            </div>
+                        </div>
+
+                        <div class="tool-item">
+                            <div class="tool-info"><span>LilyGO C1011 / T-Display (Bruce)</span><span>75%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info"><span>Universal Radio Hacker (URH)</span><span>75%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info"><span>GQRX / HackRF Tools</span><span>70%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #30363d;">
+                            <p style="margin: 0 0 8px 0; font-weight: 600; color: var(--text-main);">RF Signal
+                                Observations</p>
+                            <div class="responsive-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Signal</th>
+                                            <th>Source</th>
+                                            <th>Observed Frequency</th>
+                                            <th>Characteristics</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Jammer 1</strong></td>
+                                            <td>LilyGO C1101 (Bruce)</td>
+                                            <td>~890 MHz</td>
+                                            <td>Clean, low-power; consistent binary output.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Jammer 2</strong></td>
+                                            <td>ESP32-DIV 2</td>
+                                            <td>~890 MHz (Estimated)</td>
+                                            <td>High-noise, square-wave, dense signal patterns.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Signal 3</strong></td>
+                                            <td>Unknown Smart Doorbell</td>
+                                            <td>~430 MHz</td>
+                                            <td>Clean, repeating patterns; high signal integrity.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <p style="margin: 14px 0 8px 0; font-weight: 600; color: var(--text-main);">RF Recon
+                                Analysis: Sub-GHz Protocol Reverse Engineering</p>
+                            <div class="action-row">
+                                <button class="btn btn-primary report-toggle-btn" type="button"
+                                    data-target="rf-report-details">Toggle RF
+                                    report details</button>
+                                <button class="btn btn-ghost report-modal-btn" type="button" data-report="rf">Open
+                                    briefing</button>
+                            </div>
+                            <div id="rf-report-details" class="report-content" onclick="event.stopPropagation();">
+                                <div class="media-container" style="margin: 8px 0 12px 0;">
+                                    <img src="images/RFrecon1.png" alt="RF signal reverse engineering analysis"
+                                        class="gallery-img"
+                                        style="width: 100%; max-width: 100%; border: 1px solid #30363d; border-radius: 6px; cursor: pointer;">
+                                </div>
+                                <h5 style="margin: 8px 0 6px 0;">1. Executive Summary</h5>
+                                <p style="margin: 0 0 8px 0; color: var(--text-main);">This report documents the ongoing
+                                    reverse-engineering process of an unidentified sub-GHz IoT device captured via the
+                                    M5Stack Cardputer. The analysis was conducted using Universal Radio Hacker (URH) to
+                                    demystify packet structure, modulation, and cryptographic properties.</p>
+                                <h5 style="margin: 8px 0 6px 0;">2. Methodology</h5>
+                                <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
+                                    <li><strong>Data Collection:</strong> Raw sub-GHz signals were captured in the field
+                                        using the M5Stack Cardputer.</li>
+                                    <li><strong>Preprocessing:</strong> Captured files were imported into URH, where the
+                                        Samples/Symbol and Threshold settings were calibrated to align the raw waveform
+                                        with
+                                        digital logic.</li>
+                                    <li><strong>Comparative Analysis:</strong> Multiple captures were grouped and
+                                        processed
+                                        using the Mark Diffs functionality to isolate static identifiers from dynamic
+                                        payloads.</li>
+                                </ul>
+                                <h5 style="margin: 8px 0 6px 0;">3. Technical Findings</h5>
+                                <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
+                                    <li><strong>Protocol Classification:</strong> The signal was identified as a Rolling
+                                        Code (Dynamic) Protocol. This conclusion is based on the observation that the
+                                        entire
+                                        packet structure exhibits bit-level variations across consecutive captures,
+                                        indicating the presence of a sequence counter and encrypted payload.</li>
+                                    <li><strong>Packet Structure:</strong> The identified sequence (<code>d7 2a</code>
+                                        or
+                                        <code>ed cf</code>) acts as the synchronization layer, signaling the receiver to
+                                        initiate message processing.
+                                    </li>
+                                    <li><strong>Payload Dynamics:</strong> Comparison across multiple signals confirms
+                                        that
+                                        the protocol does not utilize static identification for the data transmission,
+                                        necessitating cryptographic analysis for further deconstruction.</li>
+                                </ul>
+                                <h5 style="margin: 8px 0 6px 0;">4. Observed Limitations</h5>
+                                <ul style="margin: 0 0 14px 0; padding-left: 20px; color: var(--text-main);">
+                                    <li>The Mark Diffs tool highlighted the entire packet as variable, which precludes a
+                                        simple replay attack.</li>
+                                    <li>Current analysis indicates that the sequence counter and command data are likely
+                                        encapsulated within an encrypted block, preventing immediate human-readable
+                                        decoding
+                                        without the underlying algorithm or master key.</li>
+                                </ul>
+
+                                <p style="margin: 14px 0 8px 0; font-weight: 600; color: var(--text-main);">RF Key Fob
+                                    Signal: Audible Pitch Conversion</p>
+                                <p style="margin: 0 0 10px 0; color: var(--text-main);">Raw RF key fob signal captured
+                                    at
+                                    ~433 MHz, converted and transposed to audible frequency range for pattern analysis
+                                    and
+                                    acoustic signature documentation. This audio representation reveals the underlying
+                                    modulation structure and timing patterns that would otherwise be invisible to human
+                                    perception.</p>
+                                <p>!cat secret!</p>
+                                <div
+                                    style="margin: 10px 0; padding: 10px; background-color: #0d1117; border-radius: 6px; border: 1px solid #30363d;">
+                                    <audio controls style="width: 100%; max-width: 100%;">
+                                        <source src="audio/RFaudio.wav" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category 4: Physical Field Testing (Matches your Cardputer image) -->
+                    <div class="tool-category-card">
+                        <h3>[+] Physical Field Gear</h3>
+
+                        <!-- Fixed Location: Cardputer belongs under Physical Field Gear -->
+                        <div class="tool-media-previews-row">
+                            <div class="tool-media-preview">
+                                <img src="images/cardputer1.jpg" alt="M5Stack Cardputer Operational Unit"
+                                    class="tool-img">
+                            </div>
+                            <div class="tool-media-preview">
+                                <img src="images/bruce.jpg" alt="LilyGO T-Display Running Bruce Firmware"
+                                    class="tool-img">
+                            </div>
+                            <div class="tool-media-preview">
+                                <img src="images/evilm5.jpg" alt="M5Stack Core2 Running EvilM5 Firmware"
+                                    class="tool-img">
+                            </div>
+                        </div>
+
+                        <div class="tool-item">
+                            <div class="tool-info"><span>M5Stack Cardputer</span><span>90%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info"><span>Proxmark3 (RFID Cloning)</span><span>85%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <div class="tool-info"><span>Flipper Zero / BadUSB Scripts</span><span>90%</span></div>
+                            <div class="progress-bg">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #30363d;">
+                            <p style="margin: 0 0 8px 0; font-weight: 600; color: var(--text-main);">New Device Inbound:
+                                ESP32-DIV Reconnaissance Platform</p>
+                            <div style="margin: 8px 0 12px 0; display: inline-block;">
+                                <img src="images/espdiv.png" alt="ESP32-DIV reconnaissance device" class="gallery-img"
+                                    style="width: 120px; height: auto; border: 1px solid #30363d; border-radius: 6px; cursor: pointer;">
+                            </div>
+                            <p style="margin: 0 0 10px 0; color: var(--text-main);">A new ESP32-DIV device is currently
+                                inbound, featuring enhanced recon capabilities for C1101 WiFi, Bluetooth, NF24 signals,
+                                and beyond. The DIV 2 variant was acquired but exhibits several firmware limitations:
+                                touch screen lag, off-target touch responsiveness, and broken SD card saving
+                                functionality. However, the DIV 1 platform supports installation of Hale Hound firmware,
+                                which provides critical bug fixes and signal amplification capabilities, making it the
+                                superior choice for sustained field operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="wardriving">
+                <h2>> Wardriving</h2>
+                <p style="color: #8b949e; margin-bottom: 20px;">Wardriving captures, mapping, and signal reconnaissance
+                    with WiGLE integration and documented local scans.</p>
+                <div class="tool-category-card" style="padding: 18px;">
+                    <p style="margin: 0 0 12px 0; color: var(--text-main);">This section documents recent wardriving
+                        activity, including signal mapping and GPS-tagged network discoveries. The badge below links to
+                        WiGLE, the wireless network mapping service used to visualize collected SSIDs, BSSIDs, and radio
+                        locations.</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 20px;">
+                        <a href="https://wigle.net" target="_blank" rel="noopener noreferrer"
+                            style="display: inline-block; border: 1px solid rgba(153, 102, 255, 0.3); border-radius: 8px; overflow: hidden; box-shadow: 0 0 18px rgba(153, 102, 255, 0.12);">
+                            <img border="0" src="https://wigle.net/bi/fXX0uhAVowNTaKTa3mvA2w.png" alt="WiGLE badge"
+                                style="display: block; max-width: 100%; height: auto;">
+                        </a>
+                        <div style="flex: 1 1 320px; min-width: 280px;">
+                            <h3 style="margin: 0 0 10px 0; color: var(--accent);">Wardriving Findings</h3>
+                            <p style="margin: 0; color: #8b949e;">Scanned local streets and parking areas for exposed
+                                wireless networks, recording both 2.4GHz and 5GHz SSIDs. The collected captures were
+                                later analyzed for weak security settings, open guest networks, and suspicious
+                                unauthorized access points.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-grid"
+                        style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                        <div class="gallery-item">
+                            <img src="images/wardriving1.png" alt="Wardriving screenshot 1" class="gallery-img">
+                            <p class="gallery-caption">Wardriving route capture with GPS annotation.</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/wardriving2.png" alt="Wardriving screenshot 2" class="gallery-img">
+                            <p class="gallery-caption">Detected wireless networks and channel heatmap.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Specialized Operations Text Log Directory -->
+            <section id="writeups">
+                <h2>> Operations Directory Logs</h2>
+
+                <div class="ops-brief">
+                    <p><strong>[+] Tactical Briefing:</strong> Select an operation module profile below to review text
+                        logs and engineering briefs across different engagement disciplines:</p>
+                </div>
+
+                <!-- Interactive Filter Tabs -->
+                <div class="filter-menu">
+                    <button class="filter-btn active" type="button" onclick="filterCategory('all', event)">all
+                        reports</button>
+                    <button class="filter-btn" type="button"
+                        onclick="filterCategory('physical', event)">field-testing</button>
+                    <button class="filter-btn" type="button" onclick="filterCategory('sdr', event)">radio-hacking /
+                        web</button>
+                    <button class="filter-btn" type="button"
+                        onclick="filterCategory('forensics', event)">wireshark</button>
+                </div>
+
+                <div class="writeup-grid">
+
+                    <!-- FIELD OP 1: Pyle Train Station -->
+                    <div class="writeup-card physical" onclick="toggleReport('report-field')">
+                        <div class="card-meta">
+                            <span class="difficulty hard" style="background: #d29922;">Field Wireless</span>
+                            <span class="platform">Pyle Train Station</span>
+                        </div>
+                        <h3>[Field Operation] Investigation of Anomalous Rogue AP Network</h3>
+                        <p>Detecting, profiling, and analyzing a hostile, evasive wireless access point in a public
+                            transit sector.</p>
+                        <button class="btn btn-ghost btn-small report-modal-btn" type="button"
+                            data-report="rogue-ap">Open full brief</button>
+                        <div id="report-field" class="report-content" onclick="event.stopPropagation();">
+                            <h4>[+] Field Intel Summary:</h4>
+                            <div class="field-report-details">
+                                <h5>1. Pyle Train Station Reconnaissance</h5>
+                                <p>Probing conducted via mobile device hardened with an always-on VPN layer. Connection
+                                    to the gateway routed traffic to a simplified captive portal login page. Fake
+                                    credentials returned immediate submission failures, indicating credential harvesting
+                                    hooks.</p>
+                                <h5>2. Hardware Reconnaissance & RF Auditing</h5>
+                                <p>Deployed an M5Stack Cardputer running EvilM5 / Bruce firmware alongside a LilyGO
+                                    T-Display-S3 running Bruce firmware to map infrastructure. Confirmed isolated
+                                    topology with 0 other connected hosts; port sweeps returned closed/filtered states.
+                                </p>
+                                <h5>3. Threat Actor Evasion Profiles</h5>
+                                <p>MAC profiling points toward a weaponized Hak5 Wi-Fi Pineapple or custom ESP32 rogue
+                                    framework. The node initiates automated targeted deauthentication frames to forcibly
+                                    disconnect audit devices within a 3-minute window, followed by a total SSID dormancy
+                                    cycle until the next day.</p>
+
+                                <h5>4. REPORT ENDED</h5>
+                                <p>Deployed an M5Stack Cardputer running EvilM5 / Bruce firmware alongside a LilyGO
+                                    After heavy reconnaissance on this AP,
+                                    I have decided to cease operations until better field devices can be obtained.
+                                    The login mechanism for this device is too flimsy for credential harvesting.
+                                    Even though this is a high-traffic area for potential victims, it is not worth
+                                    reporting, as most who need internet are utilizing mobile data, which is the
+                                    superior option in this case. AP rogue ending report for now!.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FIELD OP 2: Rogue CCTV (Pyle Asda / Fire Station) -->
+                    <div class="writeup-card physical" onclick="toggleReport('report-field-cctv')">
+                        <div class="card-meta">
+                            <span class="difficulty hard" style="background: #d29922;">Physical Recon</span>
+                            <span class="platform">Pyle Asda / Fire Station</span>
+                        </div>
+                        <h3>[Field Operation] Detection & Profiling of Rogue Wireless Surveillance Assets</h3>
+                        <p>Locating and intercepting unmapped, hidden covert IP cameras utilizing hardware RF sweeps.
+                        </p>
+                        <button class="btn btn-ghost btn-small report-modal-btn" type="button" data-report="cctv">Open
+                            full brief</button>
+                        <div id="report-field-cctv" class="report-content" onclick="event.stopPropagation();">
+                            <h4>[+] Covert Reconnaissance Briefing:</h4>
+                            <div class="field-report-details">
+                                <h5>1. Signature Profiling & Hardware Limitations</h5>
+                                <p>Isolated an anomalous wireless signature near Pyle Asda. Probed using an M5Stack
+                                    Cardputer running EvilM5. The device struggled to maintain a consistent lock due to
+                                    the target's low duty cycle and aggressive power-saving sleep configurations,
+                                    heavily pointing to an A9-style micro-spycam architecture.</p>
+                                <h5>2. Traffic Analysis & Verification</h5>
+                                <p>By shifting to scan for hidden ad-hoc infrastructure networks, the node footprint was
+                                    isolated. The device continuously broadcasts status frames over the 2.4GHz spectrum,
+                                    waiting for a localized receiver application to pull video feeds.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Radiohacker / Web App Reports Card -->
+                    <div class="writeup-card sdr" onclick="toggleReport('report-radio')">
+                        <div class="card-meta">
+                            <span class="difficulty hard" style="background: #8a63d2;">Web / DoS</span>
+                            <span class="platform">bWAPP Environments</span>
+                        </div>
+                        <h3>[bWAPP] Web App Vulnerability Lab</h3>
+                        <p>Demonstrating denial-of-service vectors and system breaches on local bWAPP servers.</p>
+                        <button class="btn btn-ghost btn-small report-modal-btn" type="button" data-report="bwapp">Open
+                            full brief</button>
+                        <div id="report-radio" class="report-content" onclick="event.stopPropagation();">
+                            <h4>[+] Exploitation Log Summary:</h4>
+                            <p>Successfully executed localized application layer stress assessments, profiling threshold
+                                constraints, session token vulnerabilities, and authentication bypass behaviors inside
+                                unhardened testing sandboxes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Wireshark Card -->
+                    <div class="writeup-card forensics" onclick="toggleReport('report-wireshark')">
+                        <div class="card-meta">
+                            <span class="difficulty easy" style="background: #58a6ff;">Analysis</span>
+                            <span class="platform">Network / Forensics</span>
+                        </div>
+                        <h3>[PCAP] Phase 1 & 2 Network Analysis</h3>
+                        <p>Analyzing network captures to isolate command-and-control communication channels.</p>
+                        <button class="btn btn-ghost btn-small report-modal-btn" type="button" data-report="pcap">Open
+                            full brief</button>
+                        <div id="report-wireshark" class="report-content" onclick="event.stopPropagation();">
+                            <h4>[+] Forensics Packet Brief:</h4>
+                            <p>Filtered traffic strings to trace malicious reverse-shell network hooks. Isolated
+                                obfuscated TCP payload handshakes communicating outwards to an unmapped, external
+                                listening gateway server.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section id="ctf-gallery">
+                <h2>> CTFs & Exploitation Video Gallery</h2>
+                <p style="color: #8b949e; margin-bottom: 20px;">The video gallery has moved to <a
+                        href="videos.html">/videos</a>.</p>
+            </section>
+
+            <section id="projects-view" style="display: none;">
+                <h2>> Projects / Video Shell View</h2>
+                <p style="color: #8b949e; margin-bottom: 16px;">Loaded shell-driven project navigation without page
+                    refresh.</p>
+                <div class="tool-category-card" style="padding: 18px;">
+                    <p style="margin: 0 0 12px 0; color: var(--text-main);">This emulated shell view represents the
+                        project gallery location in the portfolio. Use the native navigation or continue browsing the
+                        site.</p>
+                    <a href="videos.html" class="download-cyber-btn" style="display:inline-block;">Open Video
+                        Gallery</a>
+                </div>
+            </section>
+
+            <!-- SECTION 6: Collapsible Image Gallery -->
+            <section id="image-gallery" class="collapsible-gallery">
+                <button class="gallery-toggle" type="button" onclick="toggleGallery()">
+                    <span class="toggle-icon">▼</span>
+                    <h2 style="display: inline; margin: 0;">> Equipment & Hardware Gallery</h2>
+                </button>
+                <div class="gallery-content" id="gallery-content">
+                    <p style="color: #8b949e; margin-bottom: 20px; margin-top: 15px;">Visual documentation of
+                        operational equipment and
+                        hardware assets. Click any image to enlarge.</p>
+
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="images/leafo.jpg" alt="LEAFOSEC Logo" class="gallery-img">
+                            <p class="gallery-caption">LEAFOSEC Logo</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/cardputer1.jpg" alt="M5Stack Cardputer" class="gallery-img">
+                            <p class="gallery-caption">M5Stack Cardputer</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/bruce.jpg" alt="LilyGO Bruce" class="gallery-img">
+                            <p class="gallery-caption">LilyGO T-Display (Bruce)</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/evilm5.jpg" alt="EvilM5 Device" class="gallery-img">
+                            <p class="gallery-caption">M5Stack Core2 (EvilM5)</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/RH1.png" alt="Radio Hacking Hardware 1" class="gallery-img">
+                            <p class="gallery-caption">Radio Hacking Hardware Unit 1</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/RH2.png" alt="Radio Hacking Hardware 2" class="gallery-img">
+                            <p class="gallery-caption">Radio Hacking Hardware Unit 2</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/RFrecon1.png" alt="RF Signal Reverse Engineering Analysis"
+                                class="gallery-img">
+                            <p class="gallery-caption">RF Recon Analysis: Sub-GHz Protocol</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/espdiv.png" alt="ESP32-DIV Reconnaissance Device" class="gallery-img">
+                            <p class="gallery-caption">ESP32-DIV Reconnaissance Platform</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
+
+        <!-- Feedback Form (Netlify-ready + shared reviews function) -->
+        <section id="feedback">
+            <h2>>&nbsp;Feedback</h2>
+            <p class="muted-text feedback-copy">Leave your name, rating and a short comment (max 200 words).
+            </p>
+
+            <form name="feedback" id="feedback-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="feedback">
+                <p style="display:none;"><label>Don’t fill this out if you're human: <input name="bot-field"></label>
+                </p>
+
+                <label class="form-field">Name
+                    <input class="form-control" type="text" name="name" required>
+                </label>
+
+                <label class="form-field">Rating
+                    <select class="form-control" name="rating" required>
+                        <option value="5">5 - Excellent</option>
+                        <option value="4">4 - Good</option>
+                        <option value="3">3 - Okay</option>
+                        <option value="2">2 - Poor</option>
+                        <option value="1">1 - Terrible</option>
+                    </select>
+                </label>
+
+                <label class="form-field">Comment
+                    <textarea id="feedback-comment" name="comment" rows="6" required class="form-control"
+                        placeholder="Your feedback (200 words max)"></textarea>
+                </label>
+
+                <div class="form-actions">
+                    <small id="comment-counter" class="muted-text">0 / 200 words</small>
+                    <button type="submit" id="feedback-submit" class="btn btn-primary">Send Feedback</button>
+                </div>
+            </form>
+        </section>
+
+
+        <!-- THM Badges - just above copyright, no box, faded -->
+        <div id="thm-badges">
+            <div class="thm-grid">
+                <div class="thm-item">
+                    <img src="images/thm.png" alt="TryHackMe badge 1" loading="lazy">
+                </div>
+                <div class="thm-item">
+                    <img src="images/thm2.png" alt="TryHackMe badge 2" loading="lazy">
+                </div>
+                <div class="thm-item">
+                    <img src="images/thm3.png" alt="TryHackMe badge 3" loading="lazy">
+                </div>
+                <div class="thm-item">
+                    <img src="images/thm4.png" alt="TryHackMe badge 4" loading="lazy">
+                </div>
+                <div class="thm-item">
+                    <img src="images/thm6.png" alt="TryHackMe badge 5" loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>LEAFOSEC &copy; G.Leaves 2026</p>
+            <p>Robots are not allowed. ;)</p>
+            <a href="https://www.youtube.com/channel/UCm9PD1iWNE7KgPV2b4UKaNA">My Youtube</a>
+        </footer>
+
+    </div> <!-- Closing Container -->
+
+    <!-- Image modal for preview zoom -->
+    <div id="img-modal" class="img-modal" aria-hidden="true">
+        <div class="img-modal-wrapper">
+            <button class="img-modal-close" type="button" aria-label="Close image">×</button>
+            <img class="img-modal-content" id="img-modal-img" alt="">
+            <div id="img-modal-caption" class="img-modal-caption"></div>
+        </div>
+    </div>
+
+    <div id="report-modal" class="report-modal" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="report-modal-title">
+        <div class="report-modal-panel">
+            <button class="report-modal-close" type="button" aria-label="Close report">×</button>
+            <div class="report-modal-kicker" id="report-modal-kicker">Operation Brief</div>
+            <h2 id="report-modal-title">Report</h2>
+            <p id="report-modal-summary" class="muted-text"></p>
+            <div class="brief-columns">
+                <div>
+                    <h3>Evidence</h3>
+                    <ul id="report-modal-evidence"></ul>
+                </div>
+                <div>
+                    <h3>Skills Demonstrated</h3>
+                    <ul id="report-modal-skills"></ul>
+                </div>
+            </div>
+            <div class="report-modal-body" id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews | LEAFOSEC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/leafo.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="images/leafo.jpg">
+    <link rel="shortcut icon" href="images/leafo.jpg">
+    <meta name="theme-color" content="#0a0e14">
+</head>
+
+<body class="dark-theme">
+    <div class="container">
+        <header style="margin-top: 10px;">
+            <div class="header-main-flex">
+                <div class="logo-frame">
+                    <img src="images/leafo.jpg" alt="LEAFOSEC Logo" id="portfolio-logo">
+                </div>
+                <div class="header-text">
+                    <p>Ethical Hacker & Penetration Tester. Breaking things legally.</p>
+                    <nav>
+                        <a href="index.html">/home</a>
+                        <a href="videos.html">/videos</a>
+                        <a href="index.html#feedback">/feedback</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="reviews-page">
+                <h2>> Visitor Reviews</h2>
+                <p class="muted-text">Feedback submitted by visitors. Leave your own review on the <a
+                        href="index.html#feedback">feedback form</a>.</p>
+
+                <div id="reviews-container" class="reviews-grid">
+                    <!-- Reviews are loaded dynamically from Netlify Function -->
+                </div>
+
+                <div id="reviews-empty" class="reviews-empty">
+                    <p>No reviews yet. Be the first to leave feedback!</p>
+                    <a href="index.html#feedback" class="btn btn-primary"
+                        style="display:inline-block; margin-top:12px;">Leave Feedback</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>LEAFOSEC &copy; G.Leaves 2026</p>
+            <p><a href="index.html">Back to portfolio</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const container = document.getElementById('reviews-container');
+            const empty = document.getElementById('reviews-empty');
+
+            empty.style.display = 'none';
+            container.innerHTML = '';
+
+            let reviews = [];
+            try {
+                const res = await fetch('/.netlify/functions/reviews');
+                const data = await res.json();
+                reviews = Array.isArray(data && data.reviews) ? data.reviews : [];
+            } catch (e) {
+                reviews = [];
+            }
+
+            if (reviews.length === 0) {
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+
+            reviews.forEach(function (review) {
+                const card = document.createElement('div');
+                card.className = 'review-card';
+
+                // Stars
+                let starsHtml = '';
+                for (let i = 0; i < 5; i++) {
+                    starsHtml += i < review.rating ?
+                        '<span class="star star-filled">&#9733;</span>' :
+                        '<span class="star star-empty">&#9733;</span>';
+                }
+
+                // Rating label
+                const ratingLabels = {
+                    5: 'Excellent',
+                    4: 'Good',
+                    3: 'Okay',
+                    2: 'Poor',
+                    1: 'Terrible'
+                };
+                const ratingLabel = ratingLabels[review.rating] || '';
+
+                card.innerHTML = `
+                    <div class="review-card-header">
+                        <span class="review-name">${escapeHtml(review.name)}</span>
+                        <span class="review-date">${escapeHtml(review.date)}</span>
+                    </div>
+                    <div class="review-rating">
+                        ${starsHtml}
+                        <span class="review-rating-label">${ratingLabel}</span>
+                    </div>
+                    <p class="review-comment">${escapeHtml(review.comment)}</p>
+                `;
+
+                container.appendChild(card);
+            });
+        });
+
+        function escapeHtml(text) {
+            return String(text).replace(/[&<>"]/g, function (match) {
+                switch (match) {
+                    case '&':
+                        return '&';
+                    case '<':
+                        return '<';
+                    case '>':
+                        return '>';
+                    case '"':
+                        return '"';
+                    default:
+                        return match;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

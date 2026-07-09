@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos | LEAFOSEC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/leafo.jpg" type="image/jpeg">
+</head>
+
+<body class="dark-theme">
+    <div class="container">
+        <header>
+            <div class="header-main-flex">
+                <div class="logo-frame">
+                    <img src="images/leafo.jpg" alt="LEAFOSEC Logo" id="portfolio-logo">
+                </div>
+                <div class="header-text">
+                    <p>Video Gallery - Recorded CTFs & Exploitation Walkthroughs</p>
+                    <nav>
+                        <a href="index.html">/home</a>
+                        <a href="index.html#ctf-gallery">/ctfs</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Recreated CTF Video Gallery -->
+            <section id="ctf-gallery">
+                <h2>> CTFs & Exploitation Video Gallery</h2>
+                <p style="color: #8b949e; margin-bottom: 20px;">Recorded video proofs of concept, machine root
+                    escalations, and tactical screen captures:</p>
+
+                <div class="tools-grid">
+
+                    <!-- Video 1 -->
+                    <div class="tool-category-card">
+                        <h3>[+] Network Analysis: Phase 1</h3>
+                        <div class="media-container">
+                            <video class="portfolio-video" controls playsinline preload="metadata" width="100%">
+                                <source src="videos/phase 1 with music - Made with Clipchamp.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="tool-category-card">
+                        <h3>[+] Network Analysis: Phase 2</h3>
+                        <div class="media-container">
+                            <video class="portfolio-video" controls playsinline preload="metadata" width="100%">
+                                <source src="videos/phase 2 with music - Made with Clipchamp.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="tool-category-card">
+                        <h3>[+] bWAPP Network Stress Vector</h3>
+                        <div class="media-container">
+                            <video class="portfolio-video" controls playsinline preload="metadata" width="100%">
+                                <source src="videos/Dos attack on BWAPP - Made with Clipchamp.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <!-- Video 4 -->
+                    <div class="tool-category-card">
+                        <h3>[+] bWAPP Environment Run</h3>
+                        <div class="media-container">
+                            <video class="portfolio-video" controls playsinline preload="metadata" width="100%">
+                                <source src="videos/bwapp1withmusic.mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                    </div>
+
+                    <!-- Video 5 -->
+                    <div class="tool-category-card">
+                        <h3>[+] Shell Drop: Doubletrouble</h3>
+                        <div class="media-container">
+                            <video class="portfolio-video" controls playsinline preload="metadata" width="100%">
+                                <source src="videos/Doubletrouble reverse shell - Made with Clipchamp.mp4"
+                                    type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <!-- Video 6 -->
+                    <div class="tool-category-card">
+                        <h3>[+] Privilege Escalation: BeezleBoss 1</h3>
+                        <div class="media-container">
+                            <video class="portfolio-video" controls playsinline preload="metadata" width="100%">
+                                <source src="videos/BeezleBoss1Rooted - Made with Clipchamp.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <!-- Video 7 -->
+                    <div class="tool-category-card">
+                        <h3>[+] Compromise Walkthrough: Deathnote 1</h3>
+                        <div class="media-container">
+                            <video class="portfolio-video" controls playsinline preload="metadata" width="100%">
+                                <source src="videos/Deathnote1 - Made with Clipchamp.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+
+                    <!-- Video 8 -->
+                    <div class="tool-category-card">
+                        <h3>[+] ByteSec Capture: OS Analysis</h3>
+                        <div class="media-container">
+                            <video class="portfolio-video" controls playsinline preload="metadata" width="100%">
+                                <source src="videos/Os-ByteSec.mp4" type="video/mp4">
+                            </video>
+                            <div
+                                style="margin-top: 12px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px;">
+                                <button type="button" class="report-toggle-btn" data-target="report-bytesec">[+] Show
+                                    Report</button>
+                                <div id="report-bytesec" class="report-content" onclick="event.stopPropagation();">
+                                    <h4 style="margin: 0 0 8px 0; color: var(--text-main);">Report</h4>
+                                    <pre
+                                        style="white-space: pre-wrap; word-break: break-word; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; line-height: 1.5; margin: 0; color: var(--text-main);"># Penetration Test Report: Target 192.168.57.142
+
+## 1. Executive Summary
+The target system, identified as 'nitin' (running Ubuntu with Samba services), was successfully compromised. The assessment revealed insecure SMB configurations, leading to initial access, followed by local privilege escalation via a vulnerable SUID binary, ultimately granting root-level access.
+
+## 2. Technical Findings
+
+### 2.1. Initial Access & Credential Harvesting
+* SMB Service (tcp/445): Found misconfigured with guest access enabled.
+* File Access: Retrieved 'safe.zip' from an accessible SMB share, which contained credentials.
+* Brute-Force: 'fcrackzip' was used with 'rockyou.txt' to recover the password 'hacker1'.
+* Wireless Credential: A secondary password, 'snowflake', was recovered from a 'user.cap' file using 'aircrack-ng'.
+
+### 2.2. System Access
+* SSH Access: Successfully accessed the target as user 'blackjax' via port 2525 using the discovered password.
+
+### 2.3. Privilege Escalation
+* Enumeration: Identified SUID binaries, specifically '/usr/bin/netscan'.
+* Exploitation: By leveraging a PATH manipulation technique—creating a malicious 'netstat' binary in '/tmp' and prepending '/tmp' to the system '$PATH'—execution of '/usr/bin/netscan' resulted in a root shell.
+
+## 3. Strategic Recommendations
+
+1. Harden SMB Configuration: Disable guest access to all SMB shares and enforce message signing.
+2. Secure Credentials: Avoid storing password-protected archives in network-accessible locations. Rotate compromised credentials immediately.
+3. Principle of Least Privilege: Audit and remove unnecessary SUID permissions from binaries (e.g., '/usr/bin/netscan').
+4. Secure PATH Management: Ensure application paths are explicitly defined to prevent binary hijacking/PATH manipulation attacks.
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <p>LEAFOSEC &copy; G.Leaves 2026</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

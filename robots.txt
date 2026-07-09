@@ -1,0 +1,16 @@
+User-agent: *
+Disallow: /unfinished-code/
+Disallow: /caffeine-fueled-scripts/
+
+# Welcome. 
+# You've found my digital laboratory.
+# This site is a secondary project; I could code every line from scratch, 
+# but my focus is on packet analysis, reconnaissance, and security research, 
+# not web development.
+
+# I don't attack or defend. I sniff, I gather, and I climb the ladder.
+# If you're a bot, you're just another data point in my ongoing education.
+
+REMEMBER!! THERE ARE EYES,EARS AND SECRETS EVERYWHERE!
+
+68 74 74 70 73 3a 2f 2f 77 77 77 2e 79 6f 75 74 75 62 65 2e 63 6f 6d 2f 40 2d 61 6e 6f 6e 79 6d 6f 75 73 2f 76 69 64 65 6f 73
