@@ -95,9 +95,31 @@
                                     onclick="event.stopPropagation();">
                                     <h4 style="margin: 0 0 8px 0;">Technical Summary: 192.168.57.142</h4>
                                     <pre style="white-space: pre-wrap; font-family: monospace; font-size: 0.9rem;">
-[!] Vulnerability: Insecure SMB/SUID Binary
-[!] Path: /usr/bin/netscan
-[!] Result: Root Access</pre>
+## 1. Executive Summary
+The target system, identified as 'nitin' (running Ubuntu with Samba services), was successfully compromised. The assessment revealed insecure SMB configurations, leading to initial access, followed by local privilege escalation via a vulnerable SUID binary, ultimately granting root-level access.
+
+## 2. Technical Findings
+
+### 2.1. Initial Access & Credential Harvesting
+* SMB Service (tcp/445): Found misconfigured with guest access enabled.
+* File Access: Retrieved 'safe.zip' from an accessible SMB share, which contained credentials.
+* Brute-Force: 'fcrackzip' was used with 'rockyou.txt' to recover the password 'hacker1'.
+* Wireless Credential: A secondary password, 'snowflake', was recovered from a 'user.cap' file using 'aircrack-ng'.
+
+### 2.2. System Access
+* SSH Access: Successfully accessed the target as user 'blackjax' via port 2525 using the discovered password.
+
+### 2.3. Privilege Escalation
+* Enumeration: Identified SUID binaries, specifically '/usr/bin/netscan'.
+* Exploitation: By leveraging a PATH manipulation technique—creating a malicious 'netstat' binary in '/tmp' and prepending '/tmp' to the system '$PATH'—execution of '/usr/bin/netscan' resulted in a root shell.
+
+## 3. Strategic Recommendations
+
+1. Harden SMB Configuration: Disable guest access to all SMB shares and enforce message signing.
+2. Secure Credentials: Avoid storing password-protected archives in network-accessible locations. Rotate compromised credentials immediately.
+3. Principle of Least Privilege: Audit and remove unnecessary SUID permissions from binaries (e.g., '/usr/bin/netscan').
+4. Secure PATH Management: Ensure application paths are explicitly defined to prevent binary hijacking/PATH manipulation attacks.
+</pre></pre>
                                 </div>
                             </div>
                         </div>
