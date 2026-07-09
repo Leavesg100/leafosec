@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos | LEAFOSEC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/leafo.jpg" type="image/jpeg">
+</head>
+
+<body class="dark-theme">
+    <div class="container">
+        <header>
+            <div class="header-main-flex">
+                <div class="logo-frame">
+                    <img src="images/leafo.jpg" alt="LEAFOSEC Logo" id="portfolio-logo">
+                </div>
+                <div class="header-text">
+                    <p>Video Gallery - Recorded CTFs & Exploitation Walkthroughs</p>
+                    <nav>
+                        <a href="index.html">/home</a>
+                        <a href="index.html#ctf-gallery">/ctfs</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="ctf-gallery">
+                <h2>> CTFs & Exploitation Video Gallery</h2>
+                <p style="color: #8b949e; margin-bottom: 20px;">Precision-captured tactical walkthroughs and
+                    proof-of-concept deployments.</p>
+
+                <div class="tools-grid">
+
+                    <div class="tool-category-card">
+                        <h3>[+] Network Analysis: Phase 1</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/d1sy0gRBLh4"
+                                frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tool-category-card">
+                        <h3>[+] Network Analysis: Phase 2</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/QpK4D0OH21g"
+                                frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tool-category-card">
+                        <h3>[+] bWAPP Network Stress Vector</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/hYmp6gQVzlw"
+                                frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tool-category-card">
+                        <h3>[+] bWAPP Environment Run</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/Kt7f1FievYY"
+                                frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tool-category-card">
+                        <h3>[+] Shell Drop: Doubletrouble</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/kXPDrOVNxj4"
+                                frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tool-category-card">
+                        <h3>[+] Privilege Escalation: BeezleBoss 1</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/n-5wKUhzsh4"
+                                frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="tool-category-card">
+                        <h3>[+] ByteSec Capture: OS Analysis</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/K8_HFJcDuWg"
+                                frameborder="0" allowfullscreen></iframe>
+                            <div
+                                style="margin-top: 12px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px;">
+                                <button type="button" class="report-toggle-btn" data-target="report-bytesec">[+] Show
+                                    Report</button>
+                                <div id="report-bytesec" class="report-content" style="display:none;"
+                                    onclick="event.stopPropagation();">
+                                    <h4 style="margin: 0 0 8px 0;">Technical Summary: 192.168.57.142</h4>
+                                    <pre style="white-space: pre-wrap; font-family: monospace; font-size: 0.9rem;">
+[!] Vulnerability: Insecure SMB/SUID Binary
+[!] Path: /usr/bin/netscan
+[!] Result: Root Access</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">
+                ACTIVE NODE: 192.168.0.125 | VM HOST: 192.168.56.1 | TARGET SEGMENT: .129
+            </div>
+            <p>LEAFOSEC &copy; G.Leaves 2026</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
