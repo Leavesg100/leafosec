@@ -868,7 +868,7 @@ function processCommand(cmd) {
             logOutput('Site Pages:', 'output-info');
             logOutput('  open videos           - Open videos page', 'output-info');
             logOutput('  open reviews          - Open reviews page', 'output-info');
-            logOutput('  open windows report   - Open Windows 11 VM Assessment Report', 'output-info');
+            logOutput('  open windows report   - Open My Labs page', 'output-info');
             break;
 
         case 'scan portfolio':
@@ -951,7 +951,7 @@ function processCommand(cmd) {
             break;
 
         case 'open windows report':
-            window.location.href = 'Windowsreport.html';
+            window.location.href = 'MyLabs.html';
             break;
 
         case 'pwd':
@@ -1369,6 +1369,15 @@ function handleGameInput(input) {
             hackActive = false;
             gameActive = false;
             hackStage = 0;
+    }
+}
+
+// COLLAPSIBLE TOGGLE FUNCTIONALITY (for collapsible-gallery sections)
+function toggleCollapsible(button) {
+    const content = button.nextElementSibling;
+    if (content) {
+        content.classList.toggle('collapsed');
+        button.classList.toggle('collapsed');
     }
 }
 

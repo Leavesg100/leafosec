@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Labs | LEAFOSEC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/leafo.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="images/leafo.jpg">
+    <meta name="theme-color" content="#0a0e14">
+</head>
+
+<body class="dark-theme">
+
+    <div class="container">
+
+        <header>
+            <div class="header-main-flex">
+                <div class="logo-frame">
+                    <img src="images/leafo.jpg" alt="LEAFOSEC Logo" id="portfolio-logo">
+                </div>
+                <div class="header-text">
+                    <p>My Labs</p>
+                    <nav>
+                        <a href="index.html">/home</a>
+                        <a href="index.html#writeups">/reports</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section>
+                <h2 style="font-size: 24pt; font-weight: 700; margin-bottom: 16px;">> My Labs</h2>
+                <p class="muted-text" style="margin-bottom: 8px;">This page documents the lab environments and infrastructure used for security testing, network segmentation experimentation, and vulnerability assessment exercises.</p>
+                <p class="muted-text" style="font-size: 0.85rem;"><strong>Last Updated:</strong> 19 Jul 2026 | <strong>Status:</strong> Active Lab</p>
+            </section>
+
+            <!-- Lab Firewall Section (Collapsible) -->
+            <section>
+                <div class="collapsible-gallery">
+                    <button class="gallery-toggle collapsed" onclick="toggleCollapsible(this)">
+                        <span class="toggle-icon">&#9660;</span>
+                        <span><strong>> Lab Firewall: pfSense Inter-VLAN Routing & Segmentation</strong></span>
+                    </button>
+                    <div class="gallery-content collapsed">
+                        <div style="padding: 16px; color: var(--text-main); line-height: 1.8;">
+                            <p><strong>Objective:</strong> Establish a segmented virtual network environment utilizing pfSense as a centralized gateway to manage traffic between Management and Victim subnets.</p>
+
+                            <h3 style="color: var(--link); margin-top: 20px;">1. Lab Topology Configuration</h3>
+                            <p><strong>Gateway:</strong> pfSense VM (VirtualBox Internal Networks: MGMT, VICTIMS).</p>
+                            <p><strong>Segmentation Strategy:</strong> Implemented VLAN isolation at the virtual switch level using VirtualBox Internal Networking.</p>
+                            <p><strong>Addressing Scheme:</strong></p>
+                            <ul style="margin-left: 20px; margin-bottom: 10px;">
+                                <li><strong>Management (MGMT):</strong> Static IPv4 assignment on the Kali Linux administrative node.</li>
+                                <li><strong>Victim (VICTIMS):</strong> Dynamic IPv4 assignment (DHCP) on the Windows 11 target node.</li>
+                            </ul>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/pfs1.png" alt="pfSense lab topology overview" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h3 style="color: var(--link); margin-top: 20px;">2. Technical Findings & Resolution</h3>
+                            <p><strong>Observed Issue:</strong> Initial connectivity testing resulted in unidirectional ICMP traffic. The Kali node could communicate with the gateway, but inter-VLAN routing was blocked by default pfSense firewall policies.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/psf2.png" alt="pfSense firewall rule configuration" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><strong>Remediation:</strong></p>
+                            <ul style="margin-left: 20px; margin-bottom: 10px;">
+                                <li>Assigned a static IP to the Kali eth0 interface to resolve L3 routing deficiencies.</li>
+                                <li>Modified pfSense firewall policy to include "Pass" rules on both the MGMT and VICTIMS interfaces to explicitly permit inter-subnet communication.</li>
+                            </ul>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/pfs3.png" alt="pfSense pass rule configuration" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><strong>Verification:</strong> Successfully established bi-directional ICMP connectivity between the MGMT and VICTIMS subnets.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/pfs4.png" alt="pfSense connectivity verification" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/pfs5.png" alt="pfSense final configuration status" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Windows 11 Lab Section (Collapsible) -->
+            <section>
+                <div class="collapsible-gallery">
+                    <button class="gallery-toggle collapsed" onclick="toggleCollapsible(this)">
+                        <span class="toggle-icon">&#9660;</span>
+                        <span><strong>> Windows 11 Lab: VM Assessment & C2 Operations</strong></span>
+                    </button>
+                    <div class="gallery-content collapsed">
+                        <div style="padding: 16px; color: var(--text-main); line-height: 1.8;">
+
+                            <h2>1. Environment Overview</h2>
+                            <p>The target virtual machine is running Windows 11 within a VirtualBox environment, serving as a controlled node for security lab simulations. Network connectivity is established via local infrastructure with specific IP address assignments, including the target VM ending in .129.</p>
+
+                            <h2>2. Security Configuration and Testing</h2>
+                            <p>Recent exercises involved the successful establishment of a Command and Control (C2) session using the Sliver framework. This process included the generation of an obfuscated implant payload to verify inbound connection logs on the local listener.</p>
+
+                            <h2>3. Ongoing Lab Activities</h2>
+                            <p>The lab environment is part of an ongoing commitment to cybersecurity skill development, integrating practical ethical hacking and diagnostic walkthroughs. The infrastructure allows for rigorous testing of privilege escalation vectors and command execution patterns.</p>
+
+                            <h2>4. Recommendations for Further Testing</h2>
+                            <div class="responsive-table" style="margin-bottom: 20px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Test Category</th>
+                                            <th>Objective</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Lateral Movement</td>
+                                            <td>Test reachability between VMs</td>
+                                            <td>Pending</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Persistence</td>
+                                            <td>Maintain C2 after reboot</td>
+                                            <td>Pending</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>5. Reconnaissance and Enumeration</h2>
+
+                            <p><em>The assessment began with an Nmap scan to identify open ports, running services, operating system details, and any ancillary information that could inform the attack surface.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image3.png" alt="Nmap scan results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><em>Ports 135, 139, and 445 were identified as the primary candidates for initial enumeration and exploitation. The following phases leveraged Enum4linux, smbclient, and Impacket to extract further intelligence from the target.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image10.png" alt="Enum4linux results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><em>Both the smbclient null session test and the Enum4linux scan returned no useful results. Impacket was then deployed as the next logical step in the enumeration chain.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image6.png" alt="Impacket results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><em>The Impacket enumeration revealed a single username — "GHACK" — but yielded no additional foothold. This was unexpected given that all security controls had been deliberately lowered for this assessment. Further enumeration was attempted using rpcclient and enum4linux-ng to expand the reconnaissance scope.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image13.png" alt="Enum4linux-ng results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><em>Enum4linux-ng confirmed only that NetBIOS and SMB services were available, with no additional vectors identified. Attention was then turned to ntlmrelayx.py. However, a PATH resolution issue prevented the tool from being invoked directly, requiring a filesystem search to locate the binary.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image9.png" alt="Finding ntlmrelayx.py" class="gallery-img" style="width: 100%; max-width: 664px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image2.png" alt="ntlmrelayx.py execution" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><em>Once located, ntlmrelayx.py was executed with the smb2support flag enabled. The methodology required transitioning to the Windows 11 victim VM to simulate a user unknowingly triggering the relay — an admittedly contrived scenario, but one that demonstrates a valid attack chain nonetheless. Some difficulty was encountered with command syntax during the Windows-side scripting phase.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image5.png" alt="Victim VM interaction" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image4.png" alt="Cmd scripting" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><em>A password spraying attempt was also conducted but yielded no successful authentications.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image12.png" alt="Password spraying attempt" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p><em>At this stage, connectivity issues were suspected. Netstat was used to verify that port 445 was listening, and Kerberos tickets were purged in an attempt to clear any stale authentication states — neither action resolved the enumeration deadlock.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image1.png" alt="Net-connections test" class="gallery-img" style="width: 100%; max-width: 376px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image8.png" alt="Ticket purge" class="gallery-img" style="width: 100%; max-width: 346px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image7.png" alt="Additional troubleshooting" class="gallery-img" style="width: 100%; max-width: 617px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>6. Command and Control (C2) Operations</h2>
+
+                            <p><em>With traditional enumeration avenues exhausted, the focus shifted to C2 operations using the Sliver framework. An obfuscated implant payload was generated and hosted on a Python HTTP server for delivery. The Windows 11 target was then instructed to download and execute the payload. Although the browser's built-in firewall attempted to block the download, the payload was executed successfully — demonstrating that with further refinement, both browser-based defences and Windows Defender could potentially be evaded.</em></p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image11.png" alt="Sliver C2 setup" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image14.png" alt="Sliver C2 execution 1" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/image15.png" alt="Sliver C2 execution 2" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>7. Conclusion and Next Steps</h2>
+
+                            <p><em>A reverse shell was successfully established under the context of the 'GHACK' user account. The next phase of this assessment will concentrate on privilege escalation techniques, including DLL hijacking and other post-exploitation methodologies. Future testing cycles will also evaluate the environment under progressively higher security configurations to measure detection and prevention capabilities.</em></p>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">
+                ACTIVE NODE: 192.168.0.125 | VM HOST: 192.168.56.1 | TARGET SEGMENT: .129
+            </div>
+            <p>LEAFOSEC &copy; G.Leaves 2026</p>
+            <p><a href="index.html">Back to portfolio</a></p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
