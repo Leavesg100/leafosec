@@ -1,4 +1,4 @@
-Wireless Environment Reconnaissance Report: Swansea Train Station
+Wireless Environment Reconnaissance Report: publiclic Train Station
 Executive Summary
 This report summarizes the analysis of wireless network beacon and probe frames captured while stationed at the Swansea train station. The objective was to practice capturing raw wireless packets in a public, high-traffic environment for later offline analysis in Wireshark. The capture, consisting of 4,872 packets, identifies a managed wireless infrastructure characterized by enterprise-grade security and localized segment isolation.
 

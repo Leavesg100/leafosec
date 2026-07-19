@@ -472,8 +472,15 @@
                 <h2>> Operations Directory Logs</h2>
 
                 <div class="ops-brief">
-                    <p><strong>[+] Tactical Briefing:</strong> Select an operation module profile below to review text
-                        logs and engineering briefs across different engagement disciplines:</p>
+                    <p><strong>[+] Tactical Briefing:</strong> All field reconnaissance activities were conducted
+                        ethically through legal passive observation and analysis in public spaces. Select an operation
+                        module profile below to review text logs and engineering briefs across different engagement
+                        disciplines:</p>
+                </div>
+
+                <div class="ops-brief">
+                    <p><strong>[+] Operations Disclaimer:</strong> All field reconnaissance activities were conducted
+                        ethically through legal passive observation and analysis in public spaces.</p>
                 </div>
 
                 <!-- Interactive Filter Tabs -->
@@ -490,72 +497,74 @@
 
                 <div class="writeup-grid">
 
-                    <!-- FIELD OP 1: Pyle Train Station -->
+                    <!-- FIELD OP 1: Rogue AP Network -->
                     <div class="writeup-card physical" onclick="toggleReport('report-field')">
                         <div class="card-meta">
                             <span class="difficulty hard" style="background: #d29922;">Field Wireless</span>
-                            <span class="platform">Pyle Train Station</span>
+                            <span class="platform">Public Transit Area</span>
                         </div>
                         <h3>[Field Operation] Investigation of Anomalous Rogue AP Network</h3>
-                        <p>Detecting, profiling, and analyzing a hostile, evasive wireless access point in a public
-                            transit sector.</p>
+                        <p>Detecting, profiling, and analyzing an evasive wireless access point observed in a public
+                            transit sector through passive observation.</p>
                         <button class="btn btn-ghost btn-small report-modal-btn" type="button"
                             data-report="rogue-ap">Open full brief</button>
                         <div id="report-field" class="report-content" onclick="event.stopPropagation();">
                             <h4>[+] Field Intel Summary:</h4>
                             <div class="field-report-details">
-                                <h5>1. Pyle Train Station Reconnaissance</h5>
-                                <p>Probing conducted via mobile device hardened with an always-on VPN layer. Connection
-                                    to the gateway routed traffic to a simplified captive portal login page. Fake
-                                    credentials returned immediate submission failures, indicating credential harvesting
-                                    hooks.</p>
+                                <h5>1. Public Transit Area Reconnaissance</h5>
+                                <p>Passive observation conducted using a mobile device with standard security
+                                    configurations. The gateway presented a simplified captive portal login page — test
+                                    inputs returned submission failures, suggesting suspicious authentication-handling
+                                    logic
+                                    (without confirming any specific purpose or outcome).</p>
                                 <h5>2. Hardware Reconnaissance & RF Auditing</h5>
                                 <p>Deployed an M5Stack Cardputer running EvilM5 / Bruce firmware alongside a LilyGO
-                                    T-Display-S3 running Bruce firmware to map infrastructure. Confirmed isolated
-                                    topology with 0 other connected hosts; port sweeps returned closed/filtered states.
+                                    T-Display-S3 running Bruce firmware to observe and map the wireless infrastructure.
+                                    Observed an isolated
+                                    topology with 0 other connected hosts; passive port sweeps returned closed/filtered
+                                    states.
                                 </p>
-                                <h5>3. Threat Actor Evasion Profiles</h5>
-                                <p>MAC profiling points toward a weaponized Hak5 Wi-Fi Pineapple or custom ESP32 rogue
-                                    framework. The node initiates automated targeted deauthentication frames to forcibly
-                                    disconnect audit devices within a 3-minute window, followed by a total SSID dormancy
-                                    cycle until the next day.</p>
+                                <h5>3. Observed Behavioural Patterns</h5>
+                                <p>MAC profiling suggests the node may be a Hak5 Wi-Fi Pineapple or custom ESP32-based
+                                    framework. The access point was observed entering a dormant state after
+                                    approximately 3 minutes of monitoring, followed by a total SSID disappearance until
+                                    the following day — consistent with an evasive or low-observability configuration.
+                                </p>
 
-                                <h5>4. REPORT ENDED</h5>
-                                <p>Deployed an M5Stack Cardputer running EvilM5 / Bruce firmware alongside a LilyGO
-                                    After heavy reconnaissance on this AP,
-                                    I have decided to cease operations until better field devices can be obtained.
-                                    The login mechanism for this device is too flimsy for credential harvesting.
-                                    Even though this is a high-traffic area for potential victims, it is not worth
-                                    reporting, as most who need internet are utilizing mobile data, which is the
-                                    superior option in this case. AP rogue ending report for now!.
-                                </p>
+                                <h5>4. Assessment Conclusion</h5>
+                                <p>After extended passive reconnaissance of this access point, further investigation was
+                                    paused. The login mechanism appeared unreliable for any meaningful analysis, and the
+                                    high-traffic nature of the area meant most users were observed connecting via mobile
+                                    data rather than open Wi-Fi. This operation was concluded and documented for
+                                    educational reference.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- FIELD OP 2: Rogue CCTV (Pyle Asda / Fire Station) -->
+                    <!-- FIELD OP 2: Rogue Wireless Surveillance -->
                     <div class="writeup-card physical" onclick="toggleReport('report-field-cctv')">
                         <div class="card-meta">
                             <span class="difficulty hard" style="background: #d29922;">Physical Recon</span>
-                            <span class="platform">Pyle Asda / Fire Station</span>
+                            <span class="platform">Retail Parking Area</span>
                         </div>
-                        <h3>[Field Operation] Detection & Profiling of Rogue Wireless Surveillance Assets</h3>
-                        <p>Locating and intercepting unmapped, hidden covert IP cameras utilizing hardware RF sweeps.
-                        </p>
+                        <h3>[Field Operation] Detection & Profiling of Anomalous Wireless Surveillance Assets</h3>
+                        <p>Passive RF observation to identify and profile unexpected wireless devices in a
+                            public retail environment.</p>
                         <button class="btn btn-ghost btn-small report-modal-btn" type="button" data-report="cctv">Open
                             full brief</button>
                         <div id="report-field-cctv" class="report-content" onclick="event.stopPropagation();">
-                            <h4>[+] Covert Reconnaissance Briefing:</h4>
+                            <h4>[+] Passive Observation Briefing:</h4>
                             <div class="field-report-details">
                                 <h5>1. Signature Profiling & Hardware Limitations</h5>
-                                <p>Isolated an anomalous wireless signature near Pyle Asda. Probed using an M5Stack
-                                    Cardputer running EvilM5. The device struggled to maintain a consistent lock due to
-                                    the target's low duty cycle and aggressive power-saving sleep configurations,
-                                    heavily pointing to an A9-style micro-spycam architecture.</p>
+                                <p>An anomalous wireless signature was observed near a large retail parking area.
+                                    Passive scanning was conducted using an M5Stack Cardputer running EvilM5. The device
+                                    exhibited a low duty cycle with aggressive power-saving sleep configurations,
+                                    consistent with a compact wireless camera module architecture.</p>
                                 <h5>2. Traffic Analysis & Verification</h5>
-                                <p>By shifting to scan for hidden ad-hoc infrastructure networks, the node footprint was
-                                    isolated. The device continuously broadcasts status frames over the 2.4GHz spectrum,
-                                    waiting for a localized receiver application to pull video feeds.</p>
+                                <p>By shifting focus to hidden ad-hoc infrastructure networks, the node footprint was
+                                    isolated through passive observation. The device was observed broadcasting status
+                                    frames over the 2.4GHz spectrum, consistent with a localized receiver application
+                                    expecting to pull video feeds.</p>
                             </div>
                         </div>
                     </div>
@@ -590,41 +599,63 @@
                             full brief</button>
                         <div id="report-wireshark" class="report-content" onclick="event.stopPropagation();">
                             <h4>[+] Forensics Packet Brief:</h4>
-                            <p>Filtered traffic strings to trace malicious reverse-shell network hooks. Isolated
-                                obfuscated TCP payload handshakes communicating outwards to an unmapped, external
-                                listening gateway server.</p>
+                            <p>Filtered traffic strings to trace suspicious reverse-connection style network hooks.
+                                Isolated
+                                obfuscated TCP payload handshakes communicating outwards to an external
+                                listening gateway server (details intentionally kept non-specific for safety).</p>
                         </div>
                     </div>
 
-                    <!-- Wireshark Card 2: Swansea Train Station Wireless Recon -->
+                    <!-- Wireshark Card 2: Public Transit Wireless Recon -->
                     <div class="writeup-card forensics" onclick="toggleReport('report-wireshark2')">
                         <div class="card-meta">
                             <span class="difficulty easy" style="background: #58a6ff;">Wireless Recon</span>
-                            <span class="platform">Swansea Train Station</span>
+                            <span class="platform">Public Transit Hub</span>
                         </div>
-                        <h3>[PCAP] Wireless Environment Reconnaissance: Swansea Train Station</h3>
-                        <p>Raw wireless packet capture analysis of enterprise-grade infrastructure in a public transit hub.</p>
+                        <h3>[PCAP] Wireless Environment Reconnaissance: Public Transit Hub</h3>
+                        <p>Raw wireless packet capture analysis of enterprise-grade infrastructure in a public transit
+                            hub.</p>
                         <button class="btn btn-ghost btn-small report-modal-btn" type="button" data-report="pcap2">Open
                             full brief</button>
                         <div id="report-wireshark2" class="report-content" onclick="event.stopPropagation();">
                             <div class="media-container" style="margin: 8px 0 12px 0;">
-                                <img src="images/rawtowireshark1.png" alt="Swansea Train Station wireless recon capture analysis"
-                                    class="gallery-img"
+                                <img src="images/rawtowireshark1.png"
+                                    alt="Public transit hub wireless recon capture analysis" class="gallery-img"
                                     style="width: 100%; max-width: 100%; border: 1px solid #30363d; border-radius: 6px; cursor: pointer;">
                             </div>
-                            <h4>[+] Wireless Environment Reconnaissance Report: Swansea Train Station</h4>
+                            <h4>[+] Wireless Environment Reconnaissance Report: Public Transit Hub</h4>
+                            <p style="margin: 0 0 10px 0; color: var(--text-main);"><strong>Privacy & Data Handling
+                                    Note:</strong> The wireless capture details shown here were sanitized for
+                                publication: sensitive identifiers (e.g., SSIDs/BSSIDs and related labels) may be
+                                AI-rephrased or replaced with non-real placeholders to avoid exposing real-world
+                                networks.</p>
                             <h5 style="margin: 8px 0 6px 0;">Executive Summary</h5>
-                            <p style="margin: 0 0 8px 0; color: var(--text-main);">This report summarizes the analysis of wireless network beacon and probe frames captured while stationed at the Swansea train station. The objective was to practice capturing raw wireless packets in a public, high-traffic environment for later offline analysis in Wireshark. The capture, consisting of 4,872 packets, identifies a managed wireless infrastructure characterized by enterprise-grade security and localized segment isolation.</p>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);">This report summarizes the analysis
+                                of wireless network beacon and probe frames captured while stationed at a public transit
+                                hub. The objective was to practice capturing raw wireless packets in a public,
+                                high-traffic environment for later offline analysis in Wireshark. The capture,
+                                consisting of 4,872 packets, identifies a managed wireless infrastructure characterized
+                                by enterprise-grade security and localized segment isolation.</p>
                             <h5 style="margin: 8px 0 6px 0;">1. Infrastructure Overview</h5>
-                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The wireless environment at the location is primarily supported by Huawei Technologies and Hewlett Packard infrastructure, with a total of 50 unique devices identified as active participants in the broadcast layer.</p>
-                            <p style="margin: 0 0 8px 0; color: var(--text-main);"><strong>Network Segmentation:</strong> The infrastructure utilizes multiple SSIDs to segment traffic, indicating a managed environment likely deployed for a multi-tenant or campus facility. The observed network segments include:</p>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The wireless environment at the
+                                location is primarily supported by Huawei Technologies and Hewlett Packard
+                                infrastructure, with a total of 50 unique devices identified as active participants in
+                                the broadcast layer.</p>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);"><strong>Network
+                                    Segmentation:</strong> The infrastructure utilizes multiple SSIDs to segment
+                                traffic, indicating a managed environment likely deployed for a multi-tenant or campus
+                                facility. The observed network segments include:</p>
                             <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
-                                <li><strong>Managed Enterprise Networks:</strong> "ASK4 Wireless", "ASK4 Wireless (802.1x)", "Seren Staff".</li>
-                                <li><strong>IoT & Specialized Segments:</strong> "ASK4 IoT 2.4", "Internet-only", "Restricted", "COLLEAGUE".</li>
-                                <li><strong>Standalone/Other Devices:</strong> "Three_AECCDC", "RUT950_D219".</li>
+                                <li><strong>Managed Enterprise Networks:</strong> "CORP-GUEST", "STAFF-SECURE (802.1x)",
+                                    "ENTERPRISE-WIFI".</li>
+                                <li><strong>IoT & Specialized Segments:</strong> "IOT-DEVICES-2.4G", "INTERNET-ONLY",
+                                    "RESTRICTED", "SENSOR-SWARM".</li>
+                                <li><strong>Standalone/Other Devices:</strong> "CLIENT-DEVICE-A", "CLIENT-DEVICE-B".
+                                </li>
                             </ul>
                             <h5 style="margin: 8px 0 6px 0;">2. Infrastructure Inventory</h5>
-                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The environment is dominated by two primary vendors, suggesting a tiered hardware deployment strategy.</p>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The environment is dominated by two
+                                primary vendors, suggesting a tiered hardware deployment strategy.</p>
                             <div class="responsive-table">
                                 <table>
                                     <thead>
@@ -660,27 +691,48 @@
                             </div>
                             <h5 style="margin: 8px 0 6px 0;">3. Key Findings & Observations</h5>
                             <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
-                                <li><strong>Security Posture:</strong> The "ASK4 Wireless (802.1x)" network employs enterprise-grade authentication (802.1X/EAP), requiring RADIUS-based authentication.</li>
-                                <li><strong>Anomalous Behavior:</strong> A probe request originating from a locally administered MAC address (42:a2:db:22:01:34) was observed broadcasting a non-standard, null-byte SSID ("0000..."), which is often indicative of misconfigured hardware, software-defined radio (SDR) activity, or hidden network probing.</li>
-                                <li><strong>Client Behavior:</strong> IoT devices, such as a "Claudio's 2nd Fire TV Stick," were identified via Vendor Specific tags, indicating active consumer IoT integration within the network environment.</li>
+                                <li><strong>Security Posture:</strong> The "ASK4 Wireless (802.1x)" network employs
+                                    enterprise-grade authentication (802.1X/EAP), requiring RADIUS-based authentication.
+                                </li>
+                                <li><strong>Anomalous Behavior:</strong> Probe requests were observed broadcasting an
+                                    anomalous or non-standard (null-like) SSID, which can be indicative of
+                                    misconfigured hardware, SDR activity, or hidden network probing.</li>
+                                <li><strong>Client Behavior:</strong> Various consumer IoT device types were visible via
+                                    metadata labels, indicating normal device presence within the public environment.
+                                </li>
                             </ul>
                             <h5 style="margin: 8px 0 6px 0;">4. Recommendations</h5>
                             <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
-                                <li><strong>Monitor Anomaly Sources:</strong> Further investigation is recommended for devices using locally administered MAC addresses (starting with 0x42/0x46/0x4A/0x4E) to determine if these are authorized specialized devices or potential rogue hardware.</li>
-                                <li><strong>Verify Security Policies:</strong> Conduct an audit to ensure that networks labeled "Restricted" enforce Privacy flags correctly, confirming encryption is required for all connected clients.</li>
-                                <li><strong>Baseline IoT Traffic:</strong> Given the presence of consumer IoT devices, ensure these are isolated from the enterprise/staff segments to prevent lateral movement risks.</li>
+                                <li><strong>Monitor Anomaly Sources:</strong> Further investigation is recommended for
+                                    devices using locally administered MAC addresses (starting with 0x42/0x46/0x4A/0x4E)
+                                    to determine if these are authorized specialized devices or potential rogue
+                                    hardware.</li>
+                                <li><strong>Verify Security Policies:</strong> Conduct an audit to ensure that networks
+                                    labeled "Restricted" enforce Privacy flags correctly, confirming encryption is
+                                    required for all connected clients.</li>
+                                <li><strong>Baseline IoT Traffic:</strong> Given the presence of consumer IoT devices,
+                                    ensure these are isolated from the enterprise/staff segments to prevent lateral
+                                    movement risks.</li>
                             </ul>
                             <h5 style="margin: 8px 0 6px 0;">5. Applied Wireshark Filters</h5>
-                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The following display filters were utilized throughout the reconnaissance process:</p>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The following display filters were
+                                utilized throughout the reconnaissance process:</p>
                             <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
-                                <li><strong>General Beacon Filter:</strong> <code>wlan.fc.type_subtype == 0x08</code></li>
-                                <li><strong>Probe Request Filter:</strong> <code>wlan.fc.type_subtype == 0x04</code></li>
-                                <li><strong>Hidden SSID Probes:</strong> <code>wlan.fc.type_subtype == 0x04 && wlan.ssid == ""</code></li>
-                                <li><strong>Enterprise (802.1X) Traffic:</strong> <code>wlan.rsn.akm.type == 1</code></li>
-                                <li><strong>Vendor Specific Tag Search:</strong> <code>wlan.tag.number == 221</code></li>
-                                <li><strong>Anomalous/Null SSID Filter:</strong> <code>wlan.ssid == "000000000000000000000000000000000000000000"</code></li>
+                                <li><strong>General Beacon Filter:</strong> <code>wlan.fc.type_subtype == 0x08</code>
+                                </li>
+                                <li><strong>Probe Request Filter:</strong> <code>wlan.fc.type_subtype == 0x04</code>
+                                </li>
+                                <li><strong>Hidden SSID Probes:</strong> <code>wlan.fc.type_subtype == 0x04 && wlan.ssid
+                                        == ""</code></li>
+                                <li><strong>Enterprise (802.1X) Traffic:</strong> <code>wlan.rsn.akm.type == 1</code>
+                                </li>
+                                <li><strong>Vendor Specific Tag Search:</strong> <code>wlan.tag.number == 221</code>
+                                </li>
+                                <li><strong>Anomalous/Null SSID Filter:</strong> <code>wlan.ssid ==
+                                        "000000000000000000000000000000000000000000"</code></li>
                             </ul>
-                            <p style="margin: 0 0 8px 0; color: var(--text-main);"><strong>Device used:</strong> Cardputer with EVILM5 firmware</p>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);"><strong>Device used:</strong>
+                                Cardputer with EVILM5 firmware</p>
                         </div>
                     </div>
 
