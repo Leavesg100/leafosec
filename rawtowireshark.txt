@@ -1,0 +1,54 @@
+Wireless Environment Reconnaissance Report: Swansea Train Station
+Executive Summary
+This report summarizes the analysis of wireless network beacon and probe frames captured while stationed at the Swansea train station. The objective was to practice capturing raw wireless packets in a public, high-traffic environment for later offline analysis in Wireshark. The capture, consisting of 4,872 packets, identifies a managed wireless infrastructure characterized by enterprise-grade security and localized segment isolation.
+
+1. Infrastructure Overview
+The wireless environment at the location is primarily supported by Huawei Technologies and Hewlett Packard infrastructure, with a total of 50 unique devices identified as active participants in the broadcast layer.
+
+Network Segmentation
+The infrastructure utilizes multiple SSIDs to segment traffic, indicating a managed environment likely deployed for a multi-tenant or campus facility. The observed network segments include:
+
+Managed Enterprise Networks: "ASK4 Wireless", "ASK4 Wireless (802.1x)", "Seren Staff".
+
+IoT & Specialized Segments: "ASK4 IoT 2.4", "Internet-only", "Restricted", "COLLEAGUE".
+
+Standalone/Other Devices: "Three_AECCDC", "RUT950_D219".
+
+2. Infrastructure Inventory
+The environment is dominated by two primary vendors, suggesting a tiered hardware deployment strategy.
+
+Vendor	Packet Count	Observation
+Huawei	3,592	Core infrastructure provider.
+HP	1,066	Secondary infrastructure/access points.
+Other	211	Includes localized/randomized devices.
+Edup	3	Client-side hardware (e.g., adapters).
+3. Key Findings & Observations
+Security Posture: The "ASK4 Wireless (802.1x)" network employs enterprise-grade authentication (802.1X/EAP), requiring RADIUS-based authentication.
+
+Anomalous Behavior: A probe request originating from a locally administered MAC address (42:a2:db:22:01:34) was observed broadcasting a non-standard, null-byte SSID ("0000..."), which is often indicative of misconfigured hardware, software-defined radio (SDR) activity, or hidden network probing.
+
+Client Behavior: IoT devices, such as a "Claudio's 2nd Fire TV Stick," were identified via Vendor Specific tags, indicating active consumer IoT integration within the network environment.
+
+4. Recommendations
+Monitor Anomaly Sources: Further investigation is recommended for devices using locally administered MAC addresses (starting with 0x42/0x46/0x4A/0x4E) to determine if these are authorized specialized devices or potential rogue hardware.
+
+Verify Security Policies: Conduct an audit to ensure that networks labeled "Restricted" enforce Privacy flags correctly, confirming encryption is required for all connected clients.
+
+Baseline IoT Traffic: Given the presence of consumer IoT devices, ensure these are isolated from the enterprise/staff segments to prevent lateral movement risks.
+
+5. Applied Wireshark Filters
+The following display filters were utilized throughout the reconnaissance process to identify, isolate, and analyze the observed network traffic:
+
+General Beacon Filter: wlan.fc.type_subtype == 0x08
+
+Probe Request Filter: wlan.fc.type_subtype == 0x04
+
+Hidden SSID Probes: wlan.fc.type_subtype == 0x04 && wlan.ssid == ""
+
+Enterprise (802.1X) Traffic: wlan.rsn.akm.type == 1
+
+Vendor Specific Tag Search: wlan.tag.number == 221
+
+Anomalous/Null SSID Filter: wlan.ssid == "000000000000000000000000000000000000000000"
+
+Deviced used Cardputer with EVILM5 firmware

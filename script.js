@@ -42,7 +42,7 @@ const fileSystem = {
 const validSystemCommands = [
     'help', 'scan portfolio', 'dashboard', 'reports', 'report list', 'report rf', 'report rogue',
     'report cctv', 'report web', 'report pcap', 'tools', 'contact', 'open terminal', 'open about',
-    'open tools', 'open reports', 'open gallery', 'open wardriving', 'open videos', 'open reviews', 'pwd', 'cd /projects',
+    'open tools', 'open reports', 'open gallery', 'open wardriving', 'open videos', 'open reviews', 'open windows report', 'pwd', 'cd /projects',
     'cd /videos', 'cd /wardriving', 'ls', 'ls -la', 'cat README.md', 'cat notes.txt',
     'cat rogue_ap.txt', 'cat spycam.txt', 'cat wireshark.txt', 'cat /home/guest/ctf_flag.txt',
     'ifconfig', 'ps aux', 'netstat -tulpn', 'nmap -sV 10.0.0.5', 'sudo -l', 'sudo apt update',
@@ -90,6 +90,14 @@ const reportBriefs = {
         evidence: ['PCAP string filtering', 'TCP payload notes', 'External listener hypothesis'],
         skills: ['Wireshark filtering', 'Traffic triage', 'C2 pattern recognition', 'Forensic summary writing'],
         body: ['This report benefits from being concise. The next major upgrade would be adding exact filters used, packet numbers, and a short timeline.', 'Those details make it easier for a reviewer to reproduce the reasoning.']
+    },
+    pcap2: {
+        kicker: 'Wireless Recon',
+        title: 'Swansea Train Station Wireless Environment Reconnaissance',
+        summary: 'Raw wireless packet capture (4,872 packets) analyzed in Wireshark, identifying enterprise-grade Huawei/HP infrastructure, network segmentation, and anomalous probe requests.',
+        evidence: ['Wireshark capture screenshot', '4,872 packet beacon/probe frame analysis', 'Enterprise 802.1X network identification', 'Anomalous null-byte SSID probe detection'],
+        skills: ['Wireshark display filtering', 'Wireless beacon/probe frame analysis', 'Infrastructure vendor profiling', 'Network segmentation mapping', 'Anomaly detection'],
+        body: ['The capture was conducted at Swansea train station using a Cardputer with EvilM5 firmware. The environment revealed a managed multi-tenant wireless deployment with enterprise-grade security on the ASK4 Wireless (802.1x) network.', 'Key finding: A probe request from a locally administered MAC (42:a2:db:22:01:34) broadcasting a null-byte SSID was identified, potentially indicating SDR activity or misconfigured hardware.', 'Applied Wireshark filters included wlan.fc.type_subtype == 0x08 for beacons, wlan.fc.type_subtype == 0x04 for probe requests, and wlan.rsn.akm.type == 1 for 802.1X traffic.']
     }
 };
 
@@ -822,30 +830,45 @@ function processCommand(cmd) {
     switch (cmd) {
         case 'help':
             logOutput('Standard Shell Utilities:', 'output-info');
-            logOutput('  help              - Show available commands', 'output-info');
-            logOutput('  scan portfolio    - Summarize the main portfolio routes', 'output-info');
-            logOutput('  dashboard         - Jump to mission dashboard', 'output-info');
-            logOutput('  tools             - Jump to toolkit section', 'output-info');
-            logOutput('  reports           - List operation report briefs', 'output-info');
-            logOutput('  report [name]     - Open rf, rogue, cctv, web, or pcap brief', 'output-info');
-            logOutput('  contact           - Jump to contact links', 'output-info');
-            logOutput('  open [section]    - Open terminal/about/tools/reports/gallery/wardriving/videos/reviews', 'output-info');
-            logOutput('  pwd               - Print working directory', 'output-info');
-            logOutput('  cd [dir]          - Change directory or shell navigate (/projects, /videos, /wardriving)', 'output-info');
-            logOutput('  ls                - List files in current directory', 'output-info');
-            logOutput('  ls -la            - List files with permissions', 'output-info');
-            logOutput('  cat [file]        - Read file contents', 'output-info');
-            logOutput('  ifconfig          - Show network interface details', 'output-info');
-            logOutput('  ps aux            - List running processes', 'output-info');
-            logOutput('  netstat -tulpn    - List listening network sockets', 'output-info');
-            logOutput('  nmap -sV 10.0.0.5 - Scan common open ports on target host', 'output-info');
-            logOutput('  sudo -l           - Check allowed sudo commands', 'output-info');
-            logOutput('  sudo apt update   - Simulate package update check', 'output-info');
-            logOutput('  history           - Print session command log', 'output-info');
-            logOutput('  history -c        - Clear session history', 'output-info');
-            logOutput('  serial            - Simulate Web Serial hardware link session', 'output-info');
-            logOutput('  ctf               - Launch the interactive Mini-CTF challenges terminal', 'output-info');
-            logOutput('  hack              - Launch automated network exploit game', 'output-info');
+            logOutput('  help                  - Show available commands', 'output-info');
+            logOutput('  scan portfolio        - Summarize the main portfolio routes', 'output-info');
+            logOutput('  dashboard             - Jump to mission dashboard', 'output-info');
+            logOutput('  tools                 - Jump to toolkit section', 'output-info');
+            logOutput('  reports               - List operation report briefs', 'output-info');
+            logOutput('  report [name]         - Open rf, rogue, cctv, web, or pcap brief', 'output-info');
+            logOutput('  contact               - Jump to contact links', 'output-info');
+            logOutput('  open [section]        - Open terminal/about/tools/reports/gallery/wardriving/videos/reviews', 'output-info');
+            logOutput('  pwd                   - Print working directory', 'output-info');
+            logOutput('  cd [dir]              - Change directory or shell navigate (/projects, /videos, /wardriving)', 'output-info');
+            logOutput('  ls                    - List files in current directory', 'output-info');
+            logOutput('  ls -la                - List files with permissions', 'output-info');
+            logOutput('  cat [file]            - Read file contents', 'output-info');
+            logOutput('  whoami                - Display current user', 'output-info');
+            logOutput('  about                 - Read portfolio bio', 'output-info');
+            logOutput('  skills                - List technical skills', 'output-info');
+            logOutput('  uname -a              - Display system info', 'output-info');
+            logOutput('  ifconfig              - Show network interface details', 'output-info');
+            logOutput('  ps aux                - List running processes', 'output-info');
+            logOutput('  netstat -tulpn        - List listening network sockets', 'output-info');
+            logOutput('  nmap -sV 10.0.0.5     - Scan common open ports on target host', 'output-info');
+            logOutput('  sudo -l               - Check allowed sudo commands', 'output-info');
+            logOutput('  sudo apt update       - Simulate package update check', 'output-info');
+            logOutput('  history               - Print session command log', 'output-info');
+            logOutput('  history -c            - Clear session history', 'output-info');
+            logOutput('  serial                - Simulate Web Serial hardware link session', 'output-info');
+            logOutput('  ctf                   - Launch the interactive Mini-CTF challenges terminal', 'output-info');
+            logOutput('  hack                  - Launch automated network exploit game', 'output-info');
+            logOutput('  matrix                - Toggle Matrix theme effect', 'output-info');
+            logOutput('  clear                 - Clear terminal output', 'output-info');
+            logOutput('  locate *.txt          - Find all .txt files', 'output-info');
+            logOutput('Navigation Shortcuts:', 'output-info');
+            logOutput('  cd /projects          - Jump to Projects section', 'output-info');
+            logOutput('  cd /videos            - Jump to Video Gallery', 'output-info');
+            logOutput('  cd /wardriving        - Jump to Wardriving section', 'output-info');
+            logOutput('Site Pages:', 'output-info');
+            logOutput('  open videos           - Open videos page', 'output-info');
+            logOutput('  open reviews          - Open reviews page', 'output-info');
+            logOutput('  open windows report   - Open Windows 11 VM Assessment Report', 'output-info');
             break;
 
         case 'scan portfolio':
@@ -925,6 +948,10 @@ function processCommand(cmd) {
 
         case 'open reviews':
             window.location.href = 'reviews.html';
+            break;
+
+        case 'open windows report':
+            window.location.href = 'Windowsreport.html';
             break;
 
         case 'pwd':

@@ -46,6 +46,7 @@
                         <a href="#writeups">/reports</a>
                         <a href="videos.html">/videos</a>
                         <a href="reviews.html">/reviews</a>
+                        <a href="Windowsreport.html">/windows-report</a>
                     </nav>
                     <div class="header-top">
                         <div id="text-target" class="header-typing">
@@ -592,6 +593,94 @@
                             <p>Filtered traffic strings to trace malicious reverse-shell network hooks. Isolated
                                 obfuscated TCP payload handshakes communicating outwards to an unmapped, external
                                 listening gateway server.</p>
+                        </div>
+                    </div>
+
+                    <!-- Wireshark Card 2: Swansea Train Station Wireless Recon -->
+                    <div class="writeup-card forensics" onclick="toggleReport('report-wireshark2')">
+                        <div class="card-meta">
+                            <span class="difficulty easy" style="background: #58a6ff;">Wireless Recon</span>
+                            <span class="platform">Swansea Train Station</span>
+                        </div>
+                        <h3>[PCAP] Wireless Environment Reconnaissance: Swansea Train Station</h3>
+                        <p>Raw wireless packet capture analysis of enterprise-grade infrastructure in a public transit hub.</p>
+                        <button class="btn btn-ghost btn-small report-modal-btn" type="button" data-report="pcap2">Open
+                            full brief</button>
+                        <div id="report-wireshark2" class="report-content" onclick="event.stopPropagation();">
+                            <div class="media-container" style="margin: 8px 0 12px 0;">
+                                <img src="images/rawtowireshark1.png" alt="Swansea Train Station wireless recon capture analysis"
+                                    class="gallery-img"
+                                    style="width: 100%; max-width: 100%; border: 1px solid #30363d; border-radius: 6px; cursor: pointer;">
+                            </div>
+                            <h4>[+] Wireless Environment Reconnaissance Report: Swansea Train Station</h4>
+                            <h5 style="margin: 8px 0 6px 0;">Executive Summary</h5>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);">This report summarizes the analysis of wireless network beacon and probe frames captured while stationed at the Swansea train station. The objective was to practice capturing raw wireless packets in a public, high-traffic environment for later offline analysis in Wireshark. The capture, consisting of 4,872 packets, identifies a managed wireless infrastructure characterized by enterprise-grade security and localized segment isolation.</p>
+                            <h5 style="margin: 8px 0 6px 0;">1. Infrastructure Overview</h5>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The wireless environment at the location is primarily supported by Huawei Technologies and Hewlett Packard infrastructure, with a total of 50 unique devices identified as active participants in the broadcast layer.</p>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);"><strong>Network Segmentation:</strong> The infrastructure utilizes multiple SSIDs to segment traffic, indicating a managed environment likely deployed for a multi-tenant or campus facility. The observed network segments include:</p>
+                            <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
+                                <li><strong>Managed Enterprise Networks:</strong> "ASK4 Wireless", "ASK4 Wireless (802.1x)", "Seren Staff".</li>
+                                <li><strong>IoT & Specialized Segments:</strong> "ASK4 IoT 2.4", "Internet-only", "Restricted", "COLLEAGUE".</li>
+                                <li><strong>Standalone/Other Devices:</strong> "Three_AECCDC", "RUT950_D219".</li>
+                            </ul>
+                            <h5 style="margin: 8px 0 6px 0;">2. Infrastructure Inventory</h5>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The environment is dominated by two primary vendors, suggesting a tiered hardware deployment strategy.</p>
+                            <div class="responsive-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Vendor</th>
+                                            <th>Packet Count</th>
+                                            <th>Observation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Huawei</strong></td>
+                                            <td>3,592</td>
+                                            <td>Core infrastructure provider.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>HP</strong></td>
+                                            <td>1,066</td>
+                                            <td>Secondary infrastructure/access points.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Other</strong></td>
+                                            <td>211</td>
+                                            <td>Includes localized/randomized devices.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Edup</strong></td>
+                                            <td>3</td>
+                                            <td>Client-side hardware (e.g., adapters).</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h5 style="margin: 8px 0 6px 0;">3. Key Findings & Observations</h5>
+                            <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
+                                <li><strong>Security Posture:</strong> The "ASK4 Wireless (802.1x)" network employs enterprise-grade authentication (802.1X/EAP), requiring RADIUS-based authentication.</li>
+                                <li><strong>Anomalous Behavior:</strong> A probe request originating from a locally administered MAC address (42:a2:db:22:01:34) was observed broadcasting a non-standard, null-byte SSID ("0000..."), which is often indicative of misconfigured hardware, software-defined radio (SDR) activity, or hidden network probing.</li>
+                                <li><strong>Client Behavior:</strong> IoT devices, such as a "Claudio's 2nd Fire TV Stick," were identified via Vendor Specific tags, indicating active consumer IoT integration within the network environment.</li>
+                            </ul>
+                            <h5 style="margin: 8px 0 6px 0;">4. Recommendations</h5>
+                            <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
+                                <li><strong>Monitor Anomaly Sources:</strong> Further investigation is recommended for devices using locally administered MAC addresses (starting with 0x42/0x46/0x4A/0x4E) to determine if these are authorized specialized devices or potential rogue hardware.</li>
+                                <li><strong>Verify Security Policies:</strong> Conduct an audit to ensure that networks labeled "Restricted" enforce Privacy flags correctly, confirming encryption is required for all connected clients.</li>
+                                <li><strong>Baseline IoT Traffic:</strong> Given the presence of consumer IoT devices, ensure these are isolated from the enterprise/staff segments to prevent lateral movement risks.</li>
+                            </ul>
+                            <h5 style="margin: 8px 0 6px 0;">5. Applied Wireshark Filters</h5>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);">The following display filters were utilized throughout the reconnaissance process:</p>
+                            <ul style="margin: 0 0 8px 0; padding-left: 20px; color: var(--text-main);">
+                                <li><strong>General Beacon Filter:</strong> <code>wlan.fc.type_subtype == 0x08</code></li>
+                                <li><strong>Probe Request Filter:</strong> <code>wlan.fc.type_subtype == 0x04</code></li>
+                                <li><strong>Hidden SSID Probes:</strong> <code>wlan.fc.type_subtype == 0x04 && wlan.ssid == ""</code></li>
+                                <li><strong>Enterprise (802.1X) Traffic:</strong> <code>wlan.rsn.akm.type == 1</code></li>
+                                <li><strong>Vendor Specific Tag Search:</strong> <code>wlan.tag.number == 221</code></li>
+                                <li><strong>Anomalous/Null SSID Filter:</strong> <code>wlan.ssid == "000000000000000000000000000000000000000000"</code></li>
+                            </ul>
+                            <p style="margin: 0 0 8px 0; color: var(--text-main);"><strong>Device used:</strong> Cardputer with EVILM5 firmware</p>
                         </div>
                     </div>
 

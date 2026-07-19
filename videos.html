@@ -21,6 +21,7 @@
                     <nav>
                         <a href="index.html">/home</a>
                         <a href="index.html#ctf-gallery">/ctfs</a>
+                        <a href="Windowsreport.html">/windows-report</a>
                     </nav>
                 </div>
             </div>
@@ -120,6 +121,75 @@ The target system, identified as 'nitin' (running Ubuntu with Samba services), w
 3. Principle of Least Privilege: Audit and remove unnecessary SUID permissions from binaries (e.g., '/usr/bin/netscan').
 4. Secure PATH Management: Ensure application paths are explicitly defined to prevent binary hijacking/PATH manipulation attacks.
 </pre></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kioptrix Level 1 -->
+                    <div class="tool-category-card">
+                        <h3>[+] Kioptrix Level 1: Samba Exploitation</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/N0loIPJ3Okw"
+                                frameborder="0" allowfullscreen></iframe>
+                            <div
+                                style="margin-top: 12px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px;">
+                                <button type="button" class="report-toggle-btn" data-target="report-kioptrix1">[+] Show
+                                    Report</button>
+                                <div id="report-kioptrix1" class="report-content" style="display:none;"
+                                    onclick="event.stopPropagation();">
+                                    <h4 style="margin: 0 0 8px 0;">Pentest Report: Kioptrix Level 1</h4>
+                                    <pre style="white-space: pre-wrap; font-family: monospace; font-size: 0.9rem;">
+Date: 2026-07-12
+Target: 192.168.57.4
+Scope: Kioptrix Level 1 Vulnerability Assessment
+
+## 1. Executive Summary
+The target system, 192.168.57.4, was subjected to a security assessment. The target is running an outdated version of Red Hat Linux with high-risk services exposed, most notably Samba 2.2.x and Apache 1.3.20. These legacy services contain well-documented vulnerabilities that allow for remote code execution and full system compromise.
+</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kioptrix Level 2 -->
+                    <div class="tool-category-card">
+                        <h3>[+] Kioptrix Level 2: Full System Compromise</h3>
+                        <div class="media-container">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/cclL5ZcrcAo"
+                                frameborder="0" allowfullscreen></iframe>
+                            <div
+                                style="margin-top: 12px; padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px;">
+                                <button type="button" class="report-toggle-btn" data-target="report-kioptrix2">[+] Show
+                                    Report</button>
+                                <div id="report-kioptrix2" class="report-content" style="display:none;"
+                                    onclick="event.stopPropagation();">
+                                    <h4 style="margin: 0 0 8px 0;">Pentest Report: Kioptrix Level 2</h4>
+                                    <pre style="white-space: pre-wrap; font-family: monospace; font-size: 0.9rem;">
+Target IP: 192.168.57.143
+
+## 1. Executive Summary
+A penetration test was conducted on the Kioptrix Level 2 target. The engagement successfully identified multiple vulnerabilities, leading to full system compromise (root access).
+
+## 2. Technical Findings
+- 22/tcp: Open - SSH (OpenSSH 3.9p1) - Supports SSHv1
+- 80/tcp: Open - HTTP (Apache 2.0.52)
+- 111/tcp: Open - RPCBind
+- 443/tcp: Open - SSL/HTTPS (Apache 2.0.52) - Supports SSLv2
+- 631/tcp: Open - IPP (CUPS 1.1) - Forbidden
+- 3306/tcp: Open - MySQL (Unauthorized)
+
+## 3. Exploitation Narrative
+Initial reconnaissance identified several exposed services. Further investigation focused on web services, leading to the successful upload and execution of a local privilege escalation exploit (Linux Kernel 2.4/2.6 sock_sendpage).
+
+Upon execution, the shell was upgraded to root privileges (sh-3.00#). The system was then modified by creating a new administrative user 'leafosec' with the password 'hacked'.
+
+## 4. Recommendations
+- Disable deprecated services and protocols, specifically SSLv2 and SSHv1.
+- Update the Linux kernel and apply necessary patches for known privilege escalation vulnerabilities.
+- Restrict access to administrative services (e.g., MySQL, RPC, CUPS) using firewalls.
+- Implement strong password policies and audit system users regularly.
+</pre>
                                 </div>
                             </div>
                         </div>

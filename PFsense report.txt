@@ -1,0 +1,24 @@
+Lab Infrastructure Report: Inter-VLAN Routing & Segmentation
+Objective: Establish a segmented virtual network environment utilizing pfSense as a centralized gateway to manage traffic between Management and Victim subnets.
+
+1. Lab Topology Configuration
+Gateway: pfSense VM (VirtualBox Internal Networks: MGMT, VICTIMS).
+
+Segmentation Strategy: Implemented VLAN isolation at the virtual switch level using VirtualBox Internal Networking.
+
+Addressing Scheme:
+
+Management (MGMT): Static IPv4 assignment on the Kali Linux administrative node.
+
+Victim (VICTIMS): Dynamic IPv4 assignment (DHCP) on the Windows 11 target node.
+
+2. Technical Findings & Resolution
+Observed Issue: Initial connectivity testing resulted in unidirectional ICMP traffic. The Kali node could communicate with the gateway, but inter-VLAN routing was blocked by default pfSense firewall policies.
+
+Remediation:
+
+Assigned a static IP to the Kali eth0 interface to resolve L3 routing deficiencies.
+
+Modified pfSense firewall policy to include "Pass" rules on both the MGMT and VICTIMS interfaces to explicitly permit inter-subnet communication.
+
+Verification: Successfully established bi-directional ICMP connectivity between the MGMT and VICTIMS subnets.
