@@ -9,11 +9,28 @@
     <link rel="icon" href="images/leafo.jpg" type="image/jpeg">
     <link rel="apple-touch-icon" href="images/leafo.jpg">
     <meta name="theme-color" content="#0a0e14">
+    <style>
+        .site-banner.banner-lab {
+            border: none;
+            box-shadow: none;
+        }
+        .site-banner.banner-lab .banner-image {
+            max-height: 300px;
+            width: 100%;
+            object-fit: cover;
+            -webkit-mask-image: none;
+            mask-image: none;
+        }
+    </style>
 </head>
 
 <body class="dark-theme">
 
     <div class="container">
+
+        <div class="site-banner banner-lab">
+            <img src="images/banner2.png" alt="My Labs Site Banner" class="banner-image">
+        </div>
 
         <header>
             <div class="header-main-flex">
@@ -37,7 +54,7 @@
                 <p class="muted-text" style="font-size: 0.85rem;"><strong>Last Updated:</strong> 19 Jul 2026 | <strong>Status:</strong> Active Lab</p>
             </section>
 
-            <!-- Lab Firewall Section (Collapsible) -->
+            <!-- Lab Firewall Section: pfSense Inter-VLAN Routing -->
             <section>
                 <div class="collapsible-gallery">
                     <button class="gallery-toggle collapsed" onclick="toggleCollapsible(this)">
@@ -46,11 +63,48 @@
                     </button>
                     <div class="gallery-content collapsed">
                         <div style="padding: 16px; color: var(--text-main); line-height: 1.8;">
-                            <p><strong>Objective:</strong> Establish a segmented virtual network environment utilizing pfSense as a centralized gateway to manage traffic between Management and Victim subnets.</p>
+
+                            <p><strong>Objective:</strong> Establish a segmented virtual network environment utilising pfSense as a centralised gateway to manage traffic between Management and Victim subnets.</p>
+
+                            <!-- Tools Used Table -->
+                            <h3 style="color: var(--link); margin-top: 20px;">Tools Used</h3>
+                            <div class="responsive-table" style="margin-bottom: 20px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tool</th>
+                                            <th>Purpose</th>
+                                            <th>MITRE ATT&CK</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>pfSense 2.7</td>
+                                            <td>Firewall gateway and VLAN routing</td>
+                                            <td>T1090 (Proxy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>VirtualBox 7.0</td>
+                                            <td>Virtual network isolation (Internal Networks)</td>
+                                            <td>&mdash;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kali Linux</td>
+                                            <td>Management node for connectivity testing</td>
+                                            <td>&mdash;</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ICMP (ping)</td>
+                                            <td>Connectivity verification between subnets</td>
+                                            <td>T1046 (Network Service Scanning)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <h3 style="color: var(--link); margin-top: 20px;">1. Lab Topology Configuration</h3>
-                            <p><strong>Gateway:</strong> pfSense VM (VirtualBox Internal Networks: MGMT, VICTIMS).</p>
-                            <p><strong>Segmentation Strategy:</strong> Implemented VLAN isolation at the virtual switch level using VirtualBox Internal Networking.</p>
+                            <p><strong>Gateway:</strong> pfSense VM configured with two VirtualBox Internal Networks: MGMT and VICTIMS.</p>
+                            <p><strong>Segmentation Strategy:</strong> VLAN isolation was implemented at the virtual switch level using VirtualBox Internal Networking, ensuring complete network segregation between the management and victim segments.</p>
                             <p><strong>Addressing Scheme:</strong></p>
                             <ul style="margin-left: 20px; margin-bottom: 10px;">
                                 <li><strong>Management (MGMT):</strong> Static IPv4 assignment on the Kali Linux administrative node.</li>
@@ -58,58 +112,110 @@
                             </ul>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="images/pfs1.png" alt="pfSense lab topology overview" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="images/pfs1.png" alt="pfSense lab topology diagram showing MGMT and VICTIMS internal networks with Kali Linux and Windows 11 nodes" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <h3 style="color: var(--link); margin-top: 20px;">2. Technical Findings & Resolution</h3>
-                            <p><strong>Observed Issue:</strong> Initial connectivity testing resulted in unidirectional ICMP traffic. The Kali node could communicate with the gateway, but inter-VLAN routing was blocked by default pfSense firewall policies.</p>
+                            <p><strong>Observed Issue:</strong> Initial connectivity testing revealed unidirectional ICMP traffic. The Kali node could communicate with the pfSense gateway, but inter-VLAN routing was blocked by the default firewall policy, which denies all traffic between interfaces by default.</p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="images/psf2.png" alt="pfSense firewall rule configuration" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="images/psf2.png" alt="pfSense firewall ruleset showing default deny policy blocking inter-VLAN traffic" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <p><strong>Remediation:</strong></p>
                             <ul style="margin-left: 20px; margin-bottom: 10px;">
-                                <li>Assigned a static IP to the Kali eth0 interface to resolve L3 routing deficiencies.</li>
-                                <li>Modified pfSense firewall policy to include "Pass" rules on both the MGMT and VICTIMS interfaces to explicitly permit inter-subnet communication.</li>
+                                <li>A static IP address was assigned to the Kali eth0 interface to resolve Layer 3 routing deficiencies caused by DHCP lease conflicts.</li>
+                                <li>pfSense firewall rules were modified to include explicit "Pass" rules on both the MGMT and VICTIMS interfaces, permitting bi-directional inter-subnet communication.</li>
                             </ul>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="images/pfs3.png" alt="pfSense pass rule configuration" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="images/pfs3.png" alt="pfSense pass rule configuration permitting inter-VLAN traffic between MGMT and VICTIMS subnets" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
-                            <p><strong>Verification:</strong> Successfully established bi-directional ICMP connectivity between the MGMT and VICTIMS subnets.</p>
-
-                            <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="images/pfs4.png" alt="pfSense connectivity verification" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
-                            </div>
+                            <p><strong>Verification:</strong> Bi-directional ICMP connectivity was successfully established between the MGMT and VICTIMS subnets, confirming that the firewall rule modification resolved the segmentation issue.</p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="images/pfs5.png" alt="pfSense final configuration status" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="images/pfs4.png" alt="Successful ICMP echo reply confirming bi-directional connectivity between management and victim subnets" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/pfs5.png" alt="pfSense dashboard showing active interface status and traffic statistics post-configuration" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <!-- Lessons Learned -->
+                            <h3 style="color: var(--link); margin-top: 20px;">Lessons Learned</h3>
+                            <ul style="margin-left: 20px; margin-bottom: 10px;">
+                                <li>pfSense defaults to a deny-all policy on all interfaces — explicit pass rules are required for inter-VLAN routing.</li>
+                                <li>Static IP assignments on management nodes prevent DHCP-related routing issues in segmented lab environments.</li>
+                                <li>VirtualBox Internal Networks provide effective Layer 2 isolation but require complementary firewall rules at the gateway level for Layer 3 traversal.</li>
+                            </ul>
+
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Windows 11 Lab Section (Collapsible) -->
+            <!-- Windows 11 Lab Part 1: Sliver C2 & NTLM Relay Assessment -->
             <section>
                 <div class="collapsible-gallery">
                     <button class="gallery-toggle collapsed" onclick="toggleCollapsible(this)">
                         <span class="toggle-icon">&#9660;</span>
-                        <span><strong>> Windows 11 Lab: VM Assessment & C2 Operations</strong></span>
+                        <span><strong>> Windows 11 Lab: VM Assessment & C2 Operations (Sliver Framework)</strong></span>
                     </button>
                     <div class="gallery-content collapsed">
                         <div style="padding: 16px; color: var(--text-main); line-height: 1.8;">
 
+                            <p><em>This section documents the assessment of a Windows 11 virtual machine target, encompassing reconnaissance, SMB enumeration, NTLM relay attempts, and initial C2 access via the Sliver framework.</em></p>
+
+                            <!-- Tools Used Table -->
+                            <h3 style="color: var(--link); margin-top: 20px;">Tools Used</h3>
+                            <div class="responsive-table" style="margin-bottom: 20px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tool</th>
+                                            <th>Purpose</th>
+                                            <th>MITRE ATT&CK</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Nmap</td>
+                                            <td>Port scanning and service enumeration</td>
+                                            <td>T1046 (Network Service Scanning)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Enum4linux / Enum4linux-ng</td>
+                                            <td>SMB and NetBIOS enumeration</td>
+                                            <td>T1049 (System Network Connections Discovery)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Impacket (ntlmrelayx.py)</td>
+                                            <td>NTLM relay attack execution</td>
+                                            <td>T1557 (Adversary-in-the-Middle)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sliver C2</td>
+                                            <td>Command and control infrastructure</td>
+                                            <td>T1071 (Application Layer Protocol)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>rpcclient</td>
+                                            <td>RPC-based enumeration</td>
+                                            <td>T1069 (Permission Groups Discovery)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                             <h2>1. Environment Overview</h2>
-                            <p>The target virtual machine is running Windows 11 within a VirtualBox environment, serving as a controlled node for security lab simulations. Network connectivity is established via local infrastructure with specific IP address assignments, including the target VM ending in .129.</p>
+                            <p>The target virtual machine runs Windows 11 within a VirtualBox environment, serving as a controlled node for security lab simulations. Network connectivity is established via local infrastructure with static IP assignments, including the target VM on the .129 segment.</p>
 
                             <h2>2. Security Configuration and Testing</h2>
-                            <p>Recent exercises involved the successful establishment of a Command and Control (C2) session using the Sliver framework. This process included the generation of an obfuscated implant payload to verify inbound connection logs on the local listener.</p>
+                            <p>Recent exercises involved the successful establishment of a C2 session using the Sliver framework. This process included the generation of an obfuscated implant payload to verify inbound connection logs on the local listener.</p>
 
                             <h2>3. Ongoing Lab Activities</h2>
-                            <p>The lab environment is part of an ongoing commitment to cybersecurity skill development, integrating practical ethical hacking and diagnostic walkthroughs. The infrastructure allows for rigorous testing of privilege escalation vectors and command execution patterns.</p>
+                            <p>The lab environment supports an ongoing security skill development programme, integrating practical ethical hacking exercises and diagnostic walkthroughs. The infrastructure enables rigorous testing of privilege escalation vectors and command execution patterns.</p>
 
                             <h2>4. Recommendations for Further Testing</h2>
                             <div class="responsive-table" style="margin-bottom: 20px;">
@@ -129,7 +235,7 @@
                                         </tr>
                                         <tr>
                                             <td>Persistence</td>
-                                            <td>Maintain C2 after reboot</td>
+                                            <td>Maintain C2 channel after reboot</td>
                                             <td>Pending</td>
                                         </tr>
                                     </tbody>
@@ -138,89 +244,204 @@
 
                             <h2>5. Reconnaissance and Enumeration</h2>
 
-                            <p><em>The assessment began with an Nmap scan to identify open ports, running services, operating system details, and any ancillary information that could inform the attack surface.</em></p>
+                            <p><em>The assessment commenced with an Nmap scan to identify open ports, running services, operating system details, and any ancillary information that could inform the attack surface.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image3.png" alt="Nmap scan results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image3.png" alt="Nmap scan results showing open ports 135, 139, and 445 on the Windows 11 target" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
-                            <p><em>Ports 135, 139, and 445 were identified as the primary candidates for initial enumeration and exploitation. The following phases leveraged Enum4linux, smbclient, and Impacket to extract further intelligence from the target.</em></p>
+                            <p><em>Ports 135 (RPC), 139 (NetBIOS), and 445 (SMB) were identified as the primary candidates for initial enumeration and exploitation. The following phases leveraged Enum4linux, smbclient, and Impacket to extract further intelligence from the target.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image10.png" alt="Enum4linux results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image10.png" alt="Enum4linux output showing user and share enumeration attempts against the Windows 11 target" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <p><em>Both the smbclient null session test and the Enum4linux scan returned no useful results. Impacket was then deployed as the next logical step in the enumeration chain.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image6.png" alt="Impacket results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image6.png" alt="Impacket enumeration results revealing a single username GHACK" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <p><em>The Impacket enumeration revealed a single username — "GHACK" — but yielded no additional foothold. This was unexpected given that all security controls had been deliberately lowered for this assessment. Further enumeration was attempted using rpcclient and enum4linux-ng to expand the reconnaissance scope.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image13.png" alt="Enum4linux-ng results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image13.png" alt="Enum4linux-ng output confirming NetBIOS and SMB service availability with no additional vectors" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <p><em>Enum4linux-ng confirmed only that NetBIOS and SMB services were available, with no additional vectors identified. Attention was then turned to ntlmrelayx.py. However, a PATH resolution issue prevented the tool from being invoked directly, requiring a filesystem search to locate the binary.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image9.png" alt="Finding ntlmrelayx.py" class="gallery-img" style="width: 100%; max-width: 664px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image9.png" alt="Terminal output showing locate command searching for ntlmrelayx.py in the Kali filesystem" class="gallery-img" style="width: 100%; max-width: 664px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image2.png" alt="ntlmrelayx.py execution" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image2.png" alt="ntlmrelayx.py execution with smb2support flag enabled" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
-                            <p><em>Once located, ntlmrelayx.py was executed with the smb2support flag enabled. The methodology required transitioning to the Windows 11 victim VM to simulate a user unknowingly triggering the relay — an admittedly contrived scenario, but one that demonstrates a valid attack chain nonetheless. Some difficulty was encountered with command syntax during the Windows-side scripting phase.</em></p>
+                            <p><em>Once located, ntlmrelayx.py was executed with the smb2support flag enabled. The methodology required transitioning to the Windows 11 victim VM to simulate a user unknowingly triggering the relay — a deliberately contrived scenario, but one that demonstrates a valid attack chain. Some difficulty was encountered with command syntax during the Windows-side scripting phase.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image5.png" alt="Victim VM interaction" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image5.png" alt="Windows 11 victim VM terminal showing NTLM authentication trigger attempt" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image4.png" alt="Cmd scripting" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image4.png" alt="Command prompt scripting attempts on Windows 11 target for relay chain execution" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <p><em>A password spraying attempt was also conducted but yielded no successful authentications.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image12.png" alt="Password spraying attempt" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image12.png" alt="Password spraying output showing no successful authentication results" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <p><em>At this stage, connectivity issues were suspected. Netstat was used to verify that port 445 was listening, and Kerberos tickets were purged in an attempt to clear any stale authentication states — neither action resolved the enumeration deadlock.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image1.png" alt="Net-connections test" class="gallery-img" style="width: 100%; max-width: 376px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image1.png" alt="Netstat output confirming SMB port 445 is listening on the Windows 11 target" class="gallery-img" style="width: 100%; max-width: 376px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image8.png" alt="Ticket purge" class="gallery-img" style="width: 100%; max-width: 346px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image8.png" alt="Kerberos ticket purge command execution on Windows target" class="gallery-img" style="width: 100%; max-width: 346px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image7.png" alt="Additional troubleshooting" class="gallery-img" style="width: 100%; max-width: 617px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image7.png" alt="Additional network troubleshooting commands on Windows 11 target" class="gallery-img" style="width: 100%; max-width: 617px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <h2>6. Command and Control (C2) Operations</h2>
 
-                            <p><em>With traditional enumeration avenues exhausted, the focus shifted to C2 operations using the Sliver framework. An obfuscated implant payload was generated and hosted on a Python HTTP server for delivery. The Windows 11 target was then instructed to download and execute the payload. Although the browser's built-in firewall attempted to block the download, the payload was executed successfully — demonstrating that with further refinement, both browser-based defences and Windows Defender could potentially be evaded.</em></p>
+                            <p><em>With traditional enumeration avenues exhausted, the focus shifted to C2 operations utilising the Sliver framework. An obfuscated implant payload was generated and hosted on a Python HTTP server for delivery. The Windows 11 target was then instructed to download and execute the payload. Although the browser's built-in SmartScreen filter attempted to block the download, the payload was executed successfully — demonstrating that with further refinement, both browser-based defences and Windows Defender could potentially be evaded.</em></p>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image11.png" alt="Sliver C2 setup" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image11.png" alt="Sliver C2 framework interface showing implant generation and listener configuration" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image14.png" alt="Sliver C2 execution 1" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image14.png" alt="Sliver C2 session established showing callback from Windows 11 target" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <div class="media-container" style="margin: 20px 0;">
-                                <img loading="lazy" src="reportimages/image15.png" alt="Sliver C2 execution 2" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                                <img loading="lazy" src="reportimages/image15.png" alt="Sliver C2 interactive session with command execution on Windows 11 target" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
                             </div>
 
                             <h2>7. Conclusion and Next Steps</h2>
-
                             <p><em>A reverse shell was successfully established under the context of the 'GHACK' user account. The next phase of this assessment will concentrate on privilege escalation techniques, including DLL hijacking and other post-exploitation methodologies. Future testing cycles will also evaluate the environment under progressively higher security configurations to measure detection and prevention capabilities.</em></p>
+
+                            <!-- Lessons Learned -->
+                            <h2>8. Lessons Learned</h2>
+                            <ul style="margin-left: 20px; margin-bottom: 10px;">
+                                <li>SMB enumeration on modern Windows targets may yield limited results even with security controls disabled, suggesting additional service-level configuration may be required.</li>
+                                <li>PATH resolution issues with Python-based tools can be mitigated by verifying Impacket installation paths prior to engagement.</li>
+                                <li>NTLM relay attacks require precise coordination between attacker and victim VMs, including correct firewall configuration to prevent dropped relay connections.</li>
+                                <li>Sliver C2 provides reliable implant generation but payload obfuscation remains essential for evading Windows Defender and SmartScreen.</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Windows 11 Lab Part 2: Mythic C2 Framework -->
+            <section>
+                <div class="collapsible-gallery">
+                    <button class="gallery-toggle collapsed" onclick="toggleCollapsible(this)">
+                        <span class="toggle-icon">&#9660;</span>
+                        <span><strong>> Windows 11 Lab Part 2: Mythic C2 Framework with Apollo Payload</strong></span>
+                    </button>
+                    <div class="gallery-content collapsed">
+                        <div style="padding: 16px; color: var(--text-main); line-height: 1.8;">
+
+                            <p><em>Following certain limitations encountered with the Sliver C2 framework, the decision was made to transition to Mythic C2 — a more modern platform featuring an intuitive graphical interface. This section documents the payload creation, delivery, and initial access process utilising the Apollo agent.</em></p>
+
+                            <!-- Tools Used Table -->
+                            <h3 style="color: var(--link); margin-top: 20px;">Tools Used</h3>
+                            <div class="responsive-table" style="margin-bottom: 20px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tool</th>
+                                            <th>Purpose</th>
+                                            <th>MITRE ATT&CK</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Mythic C2</td>
+                                            <td>Command and control framework with Apollo agent</td>
+                                            <td>T1071 (Application Layer Protocol)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Python HTTP Server</td>
+                                            <td>Payload staging and delivery</td>
+                                            <td>T1687 (Remote File Copy)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Windows Task Scheduler</td>
+                                            <td>Persistence mechanism</td>
+                                            <td>T1053 (Scheduled Task)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>1. Payload Creation &mdash; Target OS and Apollo Agent</h2>
+                            <p>The Mythic C2 interface provides a streamlined workflow for payload generation. The target operating system was specified, and the Apollo agent was selected as the implant type for this assessment.</p>
+
+                            <h2>2. Payload Build Configuration</h2>
+                            <p>Default configuration parameters were retained for the initial payload build to establish a baseline understanding of the framework's capabilities prior to introducing custom modifications.</p>
+
+                            <h2>3. Command Selection for Payload</h2>
+                            <p>The Apollo agent's command set was configured to include essential post-exploitation utilities required for the engagement.</p>
+
+                            <h2>4. C2 Profile Configuration (HTTP)</h2>
+                            <p>An HTTP-based command and control profile was configured to manage callback communications between the target host and the Mythic server infrastructure.</p>
+
+                            <h2>5. Payload Hosting on Kali (Python HTTP Server)</h2>
+                            <p>The generated payload was staged on the Kali attack node using a Python HTTP server. While this delivery method is relatively rudimentary by modern standards, the objective at this stage was framework familiarisation rather than operational security refinement.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/windows1.png" alt="Mythic C2 payload hosted on Kali via Python HTTP server, showing terminal output with serving status" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>6. Payload Download on Windows Target</h2>
+                            <p>As anticipated, both the browser's built-in security filters and Windows Defender blocked the initial download attempt. For the purposes of this controlled lab exercise, all antivirus protections were temporarily suspended to simulate an end-user bypassing security warnings.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/windows2.png" alt="Windows Defender SmartScreen warning dialog blocking the Mythic C2 payload download" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p>The initial indication suggested the operation had failed — the terminal window typically closes without visible confirmation. However, further inspection revealed that the payload had been delivered successfully.</p>
+
+                            <h2>7. Payload Confirmation in Downloads Directory</h2>
+                            <p>The payload was confirmed present within the Downloads directory on the Windows 11 target, verifying successful delivery despite the security warnings encountered during the download phase.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/windows3.png" alt="Windows File Explorer showing the Mythic C2 Apollo payload file present in the Downloads folder" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>8. Mythic Callback Established</h2>
+                            <p>A callback was successfully established through the Mythic C2 interface. The Apollo agent checked in, confirming a functional command and control channel between the Kali attack node and the Windows 11 target host.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="reportimages/windows4.png" alt="Mythic C2 dashboard showing active Apollo agent callback from the Windows 11 target" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>9. Persistence via Scheduled Task</h2>
+                            <p>Following experimentation with the command syntax — notably, each command sent to the Windows target requires a <code>shell</code> prefix — persistence was attempted through scheduled task creation. While user creation would have been a simpler approach, it was deprioritised due to its conspicuous nature within the target environment.</p>
+                            <p>A consistent challenge throughout this exercise was payload obfuscation. Evading antivirus detection remains a recurring theme that will require further refinement in subsequent lab iterations, particularly in environments where Windows Defender is operating at full capacity.</p>
+
+                            <h2>10. Conclusion and Next Steps</h2>
+                            <p>The Mythic C2 framework proved to be a capable alternative to Sliver, offering an intuitive graphical interface and a straightforward payload generation workflow. Future work will concentrate on advanced payload obfuscation techniques to evade modern antivirus detection, alongside the implementation of more sophisticated persistence mechanisms.</p>
+
+                            <!-- Lessons Learned -->
+                            <h2>11. Lessons Learned</h2>
+                            <ul style="margin-left: 20px; margin-bottom: 10px;">
+                                <li>Mythic C2 provides a more accessible user interface compared to Sliver, reducing the initial learning curve for C2 operations.</li>
+                                <li>Python HTTP servers are functional for lab-based payload delivery but lack the sophistication required for operational security in real engagements.</li>
+                                <li>Windows Defender and SmartScreen present significant barriers to payload execution — obfuscation and evasion techniques are essential for any realistic assessment.</li>
+                                <li>Command syntax varies between C2 frameworks; the <code>shell</code> prefix requirement in Mythic's Apollo agent must be accounted for during command execution planning.</li>
+                                <li>Scheduled task persistence is a viable initial approach but may be detected by advanced endpoint monitoring solutions.</li>
+                            </ul>
 
                         </div>
                     </div>

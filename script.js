@@ -93,11 +93,11 @@ const reportBriefs = {
     },
     pcap2: {
         kicker: 'Wireless Recon',
-        title: 'Swansea Train Station Wireless Environment Reconnaissance',
-        summary: 'Raw wireless packet capture (4,872 packets) analyzed in Wireshark, identifying enterprise-grade Huawei/HP infrastructure, network segmentation, and anomalous probe requests.',
+        title: 'Public Transit Hub Wireless Environment Reconnaissance',
+        summary: 'Raw wireless packet capture (4,872 packets) analyzed in Wireshark, identifying enterprise-grade infrastructure, network segmentation, and anomalous probe requests.',
         evidence: ['Wireshark capture screenshot', '4,872 packet beacon/probe frame analysis', 'Enterprise 802.1X network identification', 'Anomalous null-byte SSID probe detection'],
         skills: ['Wireshark display filtering', 'Wireless beacon/probe frame analysis', 'Infrastructure vendor profiling', 'Network segmentation mapping', 'Anomaly detection'],
-        body: ['The capture was conducted at Swansea train station using a Cardputer with EvilM5 firmware. The environment revealed a managed multi-tenant wireless deployment with enterprise-grade security on the ASK4 Wireless (802.1x) network.', 'Key finding: A probe request from a locally administered MAC (42:a2:db:22:01:34) broadcasting a null-byte SSID was identified, potentially indicating SDR activity or misconfigured hardware.', 'Applied Wireshark filters included wlan.fc.type_subtype == 0x08 for beacons, wlan.fc.type_subtype == 0x04 for probe requests, and wlan.rsn.akm.type == 1 for 802.1X traffic.']
+        body: ['The capture was conducted at a public transit hub using a Cardputer with EvilM5 firmware. The environment revealed a managed multi-tenant wireless deployment with enterprise-grade security on the 802.1x network.', 'Key finding: A probe request from a locally administered MAC broadcasting a null-byte SSID was identified, potentially indicating SDR activity or misconfigured hardware.', 'Applied Wireshark filters included wlan.fc.type_subtype == 0x08 for beacons, wlan.fc.type_subtype == 0x04 for probe requests, and wlan.rsn.akm.type == 1 for 802.1X traffic.']
     }
 };
 
@@ -963,7 +963,7 @@ function processCommand(cmd) {
             logOutput('  USER: guest_operator_01                       ', 'output-success');
             logOutput('  CLEARANCE: Level 3 Physical & RF Auditing     ', 'output-success');
             logOutput('  STATUS: Active Penetration Tester             ', 'output-success');
-            logOutput('  TARGET ZONE: South Wales Public Transport Sector', 'output-info');
+            logOutput('  TARGET ZONE: Urban Public Transport Sector', 'output-info');
             logOutput('------------------------------------------------', 'output-secret');
             break;
 
@@ -1072,12 +1072,12 @@ function handleCatCommands(filename) {
         case 'rogue_ap.txt':
         case '/home/guest/rogue_ap.txt':
             logOutput('[+] ROGUE ACCESS POINT ANALYSIS:', 'output-success');
-            logOutput('Pyle Station AP broadcasted a random SSID with no internet access. Blocked client devices within 3 minutes using targeted deauth frames.');
+            logOutput('Public transit area AP broadcasted a random SSID with no internet access. Blocked client devices within 3 minutes using targeted deauth frames.');
             break;
         case 'spycam.txt':
         case '/home/guest/spycam.txt':
             logOutput('[+] COVERT SURVEILLANCE REPORT:', 'output-success');
-            logOutput('Isolated suspicious unmapped BSSID operating near Pyle Asda / Fire Station. Signatures closely match an A9 hidden micro-camera module.');
+            logOutput('Isolated suspicious unmapped BSSID operating near a retail parking area. Signatures closely match an A9 hidden micro-camera module.');
             break;
         case 'README.md':
         case '/home/guest/README.md':
