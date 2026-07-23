@@ -11,8 +11,9 @@
     <meta name="theme-color" content="#0a0e14">
     <style>
         .site-banner.banner-lab {
-            border: none;
-            box-shadow: none;
+            border-radius: 12px;
+            box-shadow: 0 0 40px rgba(153, 102, 255, 0.35), inset 0 0 20px rgba(153, 102, 255, 0.18);
+            overflow: hidden;
         }
         .site-banner.banner-lab .banner-image {
             max-height: 300px;
@@ -20,6 +21,7 @@
             object-fit: cover;
             -webkit-mask-image: none;
             mask-image: none;
+            border-radius: 12px;
         }
     </style>
 </head>
@@ -447,19 +449,122 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Windows 11 Lab Part 3: Social Engineering & NTLM Hash Capture -->
+            <section>
+                <div class="collapsible-gallery">
+                    <button class="gallery-toggle collapsed" onclick="toggleCollapsible(this)">
+                        <span class="toggle-icon">&#9660;</span>
+                        <span><strong>> Windows 11 Lab Part 3: Social Engineering & NTLM Hash Capture with Responder</strong></span>
+                    </button>
+                    <div class="gallery-content collapsed">
+                        <div style="padding: 16px; color: var(--text-main); line-height: 1.8;">
+
+                            <p><em>Following enumeration limitations encountered in previous phases, the assessment pivoted to a social engineering approach utilising Responder for NTLM hash capture. This section documents the phishing campaign execution, credential harvesting, hash cracking, and subsequent privilege confirmation.</em></p>
+
+                            <!-- Tools Used Table -->
+                            <h3 style="color: var(--link); margin-top: 20px;">Tools Used</h3>
+                            <div class="responsive-table" style="margin-bottom: 20px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tool</th>
+                                            <th>Purpose</th>
+                                            <th>MITRE ATT&CK</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Responder</td>
+                                            <td>NTLM hash capture via LLMNR/NBT-NS poisoning</td>
+                                            <td>T1557 (Adversary-in-the-Middle)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hashcat</td>
+                                            <td>Offline password cracking from captured NTLM hash</td>
+                                            <td>T1110.002 (Password Cracking)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Impacket</td>
+                                            <td>SMB authentication and privilege verification</td>
+                                            <td>T1021.002 (SMB/Windows Admin Shares)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Calendar Invitation (.ics)</td>
+                                            <td>Phishing vector for credential harvesting</td>
+                                            <td>T1566.002 (Phishing: Link)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>1. Social Engineering Strategy & Responder Configuration</h2>
+                            <p>To continue this project, I decided to pursue the social engineering route, as I was struggling to obtain any information beyond the username. I also utilised Responder to attempt to capture additional details. Normally, Responder captures NTLM hashes when a user accesses a nonexistent directory via File Explorer or a URL. However, I encountered two issues: Responder was not capturing these requests, and I had to navigate to my Kali Linux VM's IP address, which prompted the Windows 11 VM for credentials.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/windows11.png" alt="Responder configuration and listener setup on Kali Linux for NTLM hash capture" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>2. Phishing Vector: Calendar Meeting Invitation</h2>
+                            <p>To make the scenario as realistic as possible, I sent a calendar meeting invitation (.ics file) from the Kali Linux VM to the Windows 11 VM. This invitation contained a link that would redirect back to the Responder listener.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/windows15.png" alt="Calendar meeting invitation (.ics file) sent from Kali Linux to Windows 11 target containing malicious link" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <p>As illustrated, this is a classic phishing technique. What makes this approach particularly effective is that users are less likely to suspect a malicious link embedded within a calendar event or meeting request. Additionally, the email provider did not flag it as spam.</p>
+
+                            <h2>3. Credential Harvesting & NTLM Hash Capture</h2>
+                            <p>The user is prompted to enter credentials, which Responder then captures as an NTLM hash.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/windows13.png" alt="Windows 11 credential prompt triggered by Responder listener, capturing NTLM authentication attempt" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/windows14.png" alt="Responder terminal output showing captured NTLM hash from Windows 11 target" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>4. Password Cracking with Hashcat</h2>
+                            <p>This approach proved successful. Using Hashcat, I cracked the captured NTLM hash to reveal the password. I then authenticated to SMB shares and used Impacket tools to confirm administrative privileges, enabling persistence. However, this method relies heavily on user error and was not the primary focus for further objectives.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/windows16.png" alt="Hashcat cracking session showing NTLM hash being cracked to reveal plaintext password" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>5. Administrative Access Verification</h2>
+                            <p>With the cracked credentials, authentication to SMB shares was attempted and administrative privileges were confirmed, enabling further post-exploitation activities.</p>
+
+                            <div class="media-container" style="margin: 20px 0;">
+                                <img loading="lazy" src="images/windows17.png" alt="Impacket SMB authentication using cracked credentials confirming administrative access" class="gallery-img" style="width: 100%; max-width: 624px; height: auto; border-radius: 6px; border: 1px solid var(--border); cursor: pointer;">
+                            </div>
+
+                            <h2>6. Conclusion and Future Objectives</h2>
+                            <p>My next goals for this project include:</p>
+                            <ul style="margin-left: 20px; margin-bottom: 10px;">
+                                <li>DLL injection techniques</li>
+                                <li>SeImpersonatePrivilege exploitation</li>
+                                <li>Juicy Potato / Rogue Potato style attacks</li>
+                                <li>Attempting to regain access from Kali Linux only, if possible</li>
+                            </ul>
+
+                            <!-- Lessons Learned -->
+                            <h2>7. Lessons Learned</h2>
+                            <ul style="margin-left: 20px; margin-bottom: 10px;">
+                                <li>Social engineering remains one of the most effective attack vectors, particularly when technical enumeration avenues are limited.</li>
+                                <li>Calendar invitations and meeting requests are underutilised phishing vectors that bypass many email security filters.</li>
+                                <li>Responder is a powerful tool for NTLM hash capture but requires realistic attack scenarios to trigger authentication attempts.</li>
+                                <li>NTLM hashes can be cracked efficiently with Hashcat when weak passwords are in use, emphasising the importance of strong password policies.</li>
+                                <li>This method relies heavily on user error and may not be viable in environments with robust security awareness training.</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
 
-        <footer>
-            <div style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">
-                ACTIVE NODE: 192.168.0.125 | VM HOST: 192.168.56.1 | TARGET SEGMENT: .129
-            </div>
-            <p>LEAFOSEC &copy; G.Leaves 2026</p>
-            <p><a href="index.html">Back to portfolio</a></p>
-        </footer>
-
-    </div>
-
-    <script src="script.js"></script>
-</body>
-
+        <script src="script.js"></script>
+    </body>
 </html>

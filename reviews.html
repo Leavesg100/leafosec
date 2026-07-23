@@ -116,23 +116,7 @@
                 container.appendChild(card);
             });
         });
-
-        function escapeHtml(text) {
-            return String(text).replace(/[&<>"]/g, function (match) {
-                switch (match) {
-                    case '&':
-                        return '&';
-                    case '<':
-                        return '<';
-                    case '>':
-                        return '>';
-                    case '"':
-                        return '"';
-                    default:
-                        return match;
-                }
-            });
-        }
+        // escapeHtml is provided by script.js (loaded above) — using the shared, correct implementation
     </script>
 </body>
 
